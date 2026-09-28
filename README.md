@@ -13,7 +13,7 @@ UIC, CS 418: Introduction to Data Science, Fall 2026
 * Which demographics are effective for predicting high pollution levels?
 
 ## Primary Datasets 
-* Chicago_Community_Population (source: Chicago Health Atlas, https://chicagohealthatlas.org/download)
+* Chicago_Community_Population (source: Chicago Health Atlas, https://chicagohealthatlas.org/indicators/INC)
 * Open Air Chicago Day Aggregation (source: Chicago Data Portal, https://data.cityofchicago.org/Health-Human-Services/Open-Air-Chicago-Day-Aggregations/rtmx-vkjr/about_data)
 
 ## Secondary Datasets 
