@@ -9,8 +9,8 @@ UIC, CS 418: Introduction to Data Science, Fall 2026
 * Jesus Rodriguez
 
 ## Research Questions
-How is median household income associated with differences in air pollution exposure across Chicago community areas? 
-Which demographics are effective for predicting high pollution levels?
+* How is median household income associated with differences in air pollution exposure across Chicago community areas? 
+* Which demographics are effective for predicting high pollution levels?
 
 ## Primary Datasets 
 * Chicago_Community_Population
