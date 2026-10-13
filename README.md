@@ -21,3 +21,20 @@ UIC, CS 418: Introduction to Data Science, Fall 2026
 * CommunityAreas_LocalEmission (source: Chicago Metropolitan Agency for Planning, (https://datahub.cmap.illinois.gov/datasets/communityareas-localemission2019/about)
 
 We plan to compare the CommunityAreas_LocalEmission dataset to the primary Open Air Chicago Day Aggregation dataset to cross-check air quality levels over time and see which neighborhoods have the most greenhouse gas emissions as a measure of pollution. 
+
+## EDA Summary
+Dataset basics:
+* Chicago Community Population Data: contains Chicago community areas and demographics. No null values. Analyzed number of households per community area by income bracket.
+* Open Air Chicago Day Aggregations: Contains daily aggregated data since September 2025 to present from environmental sensors in various locations in and around Chicago. Investigated distributions of PM 2.5 and NO2 readings and aggregated by sensor name. 
+* Joined Open Air sensors with community areas and removed sensors outside of Chicago
+* Community Area Local Emission dataset: Analyzed on-road CO2 emissions across Chicago community areas.
+* Income dataset: Compared against mean PM 2.5 concentration from Open Air Chicago dataset. 
+
+Anomaly notes:
+* The Open Air Chicago dataset contained many null values, several of which were caused by offline sensors. Irrelevant columns and rows with null values were dropped. Sensor calibration should also be investigated further. 
+
+Significant findings: 
+* Preliminary analysis shows most of the sensors with the highest and lowest readings are located on Chicago's South and West sides. More investigation is warranted to find any other correlations between area and air pollution.
+* Preliminary analysis shows little to no linear correlation between median household income and average PM 2.5 exposure. Further investigation is likely needed.
+
+Research questions: Our research questions may need to change in the future based on our EDA findings, especially the lack of a linear correlation between income and air quality.
