@@ -38,3 +38,7 @@ Significant findings:
 * Preliminary analysis shows little to no linear correlation between median household income and average PM 2.5 exposure. Further investigation is likely needed.
 
 Research questions: Our research questions may need to change in the future based on our EDA findings, especially the lack of a linear correlation between income and air quality.
+
+Ideas:
+Revised RQ1: Does household income relate more to steady, everyday PM2.5 levels or to short pollution spikes across Chicago's community areas?
+Revised RQ2: Does being near industrial sites and transportation corridors predict pollution spikes better than income alone?
