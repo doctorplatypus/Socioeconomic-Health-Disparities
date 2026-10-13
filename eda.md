@@ -51,4 +51,4 @@ Tl;dr this is all evidence of potential correlation, not definitive evidence of 
 1. Does household income relate more to average PM2.5 levels or short pollution spikes across Chicago communities?
 2. Does proximity to industrial sites and transportation corridors predict pollution spikes better than income alone?
 
-The weak income–PM2.5 relationships shifted our focus toward location, industry, and major roadways (including I-55 and I-90/94). This is going to be the work we do next, ideally anyway.
+The weak income PM2.5 relationships shifted our focus toward location, industry, and major roadways (including I-55 and I-90/94). This is going to be the work we do next, ideally anyway.
