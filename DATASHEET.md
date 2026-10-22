@@ -1,22 +1,46 @@
 # Dataset Documentation
 
 ## 1. Chicago Community Population
-### 1.1 Motivation
-### 1.2 Composition
-### 1.3 Collection Process
-### 1.4 Preprocessing
-### 1.5 Uses
-### 1.6 Distribution
-### 1.7 Maintenance
+
+### Dataset Nutrition Label
+
+| Property | Value |
+|---|---|
+| Dataset name | |
+| Publisher | |
+| Source URL | |
+| Date accessed / version | |
+| Number of rows | |
+| Number of columns | |
+| What one row represents | |
+| Geographic coverage | |
+| Time coverage | |
+| File format | |
+| Missing values | |
+| License / terms of use | |
+| Main limitations | |
+  
 
 ## 2. Open Air Chicago Day Aggregations
-### 2.1 Motivation
-### 2.2 Composition
-### 2.3 Collection Process
-### 2.4 Preprocessing
-### 2.5 Uses
-### 2.6 Distribution
-### 2.7 Maintenance
+
+### Dataset Nutrition Label
+
+| Property | Value |
+|---|---|
+| Dataset name | |
+| Publisher | |
+| Source URL | |
+| Date accessed / version | |
+| Number of rows | |
+| Number of columns | |
+| What one row represents | |
+| Geographic coverage | |
+| Time coverage | |
+| File format | |
+| Missing values | |
+| License / terms of use | |
+| Main limitations | |
+  
 
 ## 3. Research Question Scope
 ### 3.1 Target Population
