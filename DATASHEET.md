@@ -209,7 +209,7 @@ The network is jointly managed and maintained by **CDPH and UIC School of Public
 
 # Part I. Nutrition label, references and group sign-off
 
-**Nutrition label:** [Open Air Chicago label PDF](nutrition_label/main.pdf). Editable source: [`nutrition_label/main.tex`](nutrition_label/main.tex) and [`nutrition_label/Card.tex`](nutrition_label/Card.tex).
+**Nutrition label:** [Open Air Chicago label PDF](nutrition_label/main.pdf). Source: [`nutrition_label/main.tex`](nutrition_label/main.tex) and [`nutrition_label/Card.tex`](nutrition_label/Card.tex).
 
 ## Sources
 
