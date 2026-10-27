@@ -66,7 +66,7 @@ The dataset supports descriptive comparisons of local pollution measurements and
 
 The dataset is publicly available from the [City of Chicago Data Portal](https://data.cityofchicago.org/Health-Human-Services/Open-Air-Chicago-Day-Aggregations/rtmx-vkjr/about_data) as a **CSV download** and through a **Socrata API** such as `https://data.cityofchicago.org/resource/rtmx-vkjr.csv`. The team member verified permission for downloading, analysis, processing and redistribution. **No specific dataset license was identified.** This is a statement about the observed documentation, not a declaration that the data have no legal terms.
 
-[TODO Anirudh/Andrew: Preserve a direct link to the exact portal terms supporting reuse and include attribution requirements if stated. Record query parameters or a frozen snapshot rather than depending on a changing live endpoint.]
+[TODO Anirudh: Preserve a direct link to the exact portal terms supporting reuse and include attribution requirements if stated. Record query parameters or a frozen snapshot rather than depending on a changing live endpoint.]
 
 ## A7. Maintenance and evolution
 
@@ -112,7 +112,7 @@ The network is jointly managed and maintained by **CDPH and UIC School of Public
 
 # Part C. Data scope: population, access frame and actual samples
 
-| Question | Open Air Chicago (Andrew) | Community Population (Claudia / Auon) |
+| Question | Open Air Chicago | Community Population (Claudia / Auon) |
 |---|---|---|
 | **Target population** | Chicago's 77 community areas and residents whose neighborhood outdoor-air environment is relevant to the research; residents themselves are not measured. | [TODO] |
 | **Access / observation frame** | Sensors and UTC dates reporting observations through the monitoring network, including additional federal-site monitors. | [TODO] |
@@ -174,7 +174,7 @@ The network is jointly managed and maintained by **CDPH and UIC School of Public
 
 # Part F. FAIR: findability, accessibility, interoperability, reusability
 
-| FAIR dimension | Open Air Chicago (Andrew) | Chicago Community Population (Auon) |
+| FAIR dimension | Open Air Chicago  | Chicago Community Population (Auon) |
 |---|---|---|
 | **Findable** | Chicago Data Portal [landing page](https://data.cityofchicago.org/Health-Human-Services/Open-Air-Chicago-Day-Aggregations/rtmx-vkjr/about_data), identifier `rtmx-vkjr`, [Data.gov catalog](https://catalog.data.gov/dataset/open-air-chicago-day-aggregations). | [TODO] |
 | **Accessible** | Public CSV/API download; record the query and snapshot date. | [TODO] |
@@ -187,7 +187,7 @@ The network is jointly managed and maintained by **CDPH and UIC School of Public
 
 # Part G. People, ethics, limitations and responsible interpretation
 
-**Open Air Chicago, preliminary scope notes (Andrew):** The monitoring locations are not identifiable individual participants. The results concern places that affect residents across Chicago. Environmental-justice analysis requires attention to monitoring density, missing data, possible measurement bias, local differences within the same community area, and the difference between neighborhood-level ambient concentration and any person's exposure. A correlation with median income does not imply causation and should not stigmatize communities.
+**Open Air Chicago, preliminary scope notes:** The monitoring locations are not identifiable individual participants. The results concern places that affect residents across Chicago. Environmental-justice analysis requires attention to monitoring density, missing data, possible measurement bias, local differences within the same community area, and the difference between neighborhood-level ambient concentration and any person's exposure. A correlation with median income does not imply causation and should not stigmatize communities.
 
 - **Open Air people/ethics expansion:** [TODO Jesus: affected communities, privacy, representation, accountability, potential harm, uncertainty, use limitations and source-backed explanation.]
 - **Community Population people/ethics:** [TODO Claudia/Auon: aggregate demographics, privacy/suppression, stereotypes, sampling and equity].
@@ -218,18 +218,6 @@ The network is jointly managed and maintained by **CDPH and UIC School of Public
 3. [Chicago Health Atlas, income indicator](https://chicagohealthatlas.org/indicators/INC) [TODO Claudia/Auon: exact population dataset citation and access date].
 4. [Chicago Data Portal, ACS 5-Year Data by Community Area](https://data.cityofchicago.org/Community-Economic-Development/ACS-5-Year-Data-by-Community-Area-Most-Recent-Year/7umk-8dtw/about_data) [TODO: if used, retrieval date].
 5. [CMAP, Community Areas Local Emission 2019](https://datahub.cmap.illinois.gov/datasets/communityareas-localemission2019/about) [TODO: if used, retrieval date].
-6. [TODO Andrew/Anirudh: direct City portal terms URL explaining redistribution, if not already linked in source].
+6. [TODO Anirudh: direct City portal terms URL explaining redistribution, if not already linked in source].
 7. [TODO all: methodology/codebook references that substantiate precise variable descriptions].
 
-## Group integration checklist
-
-- [ ] Claudia's Community Population publisher research inserted and source-checked.
-- [ ] Auon's codebook/cleaning/FAIR contributions inserted.
-- [ ] Jesus's Open Air codebook, ethics, cleaning and spatial-join steps inserted.
-- [ ] Anirudh's cross-dataset reproducible join and count ledger inserted.
-- [ ] **All** placeholder items removed or explicitly explained as genuinely unknown.
-- [ ] Data snapshots, file paths, column names, observation dates and counts consistent with notebooks.
-- [ ] Privacy, collection limits, licensing/terms and potential misuse reviewed.
-- [ ] Existing `README.md` updated to link `DATASHEET.md`.
-- [ ] Nutrition label reviewed and consistent with the selected snapshot.
-- [ ] All five members reviewed the submission and made a Git contribution; applicable course AI-use rules followed.
