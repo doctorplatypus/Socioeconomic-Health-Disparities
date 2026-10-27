@@ -1,0 +1,36 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{xparse}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[margin=0.85in]{geometry}
+\hypersetup{colorlinks=true,urlcolor=blue}
+
+% Nutrition-label commands adapted from the supplied Overleaf template.
+\newlength{\NFwidth}
+\setlength{\NFwidth}{4.9in}
+\NewDocumentCommand{\NFelement}{mmm}{\normalsize\textbf{#1} #2\hfill #3}
+\NewDocumentCommand{\NFline}{O{l}m}{\footnotesize\makebox[\NFwidth][#1]{#2}}
+\NewDocumentCommand{\NFentry}{sm}{%
+  \makebox[.5\NFwidth][l]{\normalsize
+    \IfBooleanT{#1}{\makebox[0pt][r]{\textbullet\ }}#2}\ignorespaces}
+\NewDocumentCommand{\NFtext}{+m}{\parbox{\NFwidth}{\raggedright#1}}
+\newcommand{\NFtitle}{\multicolumn{1}{c}{\huge\bfseries Dataset Facts}}
+\newcommand{\NFRULE}{\midrule[5pt]}
+\newcommand{\NFRule}{\midrule[2pt]}
+\newcommand{\NFrule}{\midrule}
+
+\begin{document}
+\begin{center}
+  \resizebox{11cm}{!}{\input{Card}}
+\end{center}
+\noindent\small\textit{Open Air Chicago Day Aggregations nutrition label. API snapshot retrieved October 27, 2026.}\normalsize\par
+
+\noindent\textbf{Original dataset:} \href{https://data.cityofchicago.org/Health-Human-Services/Open-Air-Chicago-Day-Aggregations/rtmx-vkjr/about_data}{Chicago Data Portal, Open Air Chicago Day Aggregations}.\\
+\textbf{Related metadata:} \href{https://catalog.data.gov/dataset/open-air-chicago-day-aggregations}{Data.gov record}.\\
+\textbf{Snapshot:} Retrieved October 27, 2026. The original API extract contains 121,606 rows and 46 columns; the analysis sample retains 119,859 rows and 15 columns after removing missing values in selected fields.\par
+\textbf{Reuse:} The student verified download, processing, and redistribution permission; no specific dataset license was identified.\par
+\textbf{Funding:} Dr. Serap Erdal, Community-Driven Air Quality and Environmental Justice Assessment, NIST grant 60NANB23D206 (Oct 2023--Sep 2026); ComEd Hyperlocal Air Quality Assessment, RHP Risk Management / ComEd / Exelon LLC (Jan 2025--Jan 2026).
+\end{document}
