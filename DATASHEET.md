@@ -290,7 +290,7 @@ Step 4: The draft states that match counts are printed after the join (air rows,
 
 ---
 
-# Part I. Nutrition label, references and group sign-off
+# Part I. Nutrition label, references
 
 **Existing nutrition label (Open Air Chicago, prepared before ownership correction):** [Open Air Chicago label PDF](nutrition_label/main.pdf). Editable source: [`nutrition_label/main.tex`](nutrition_label/main.tex) and [`nutrition_label/Card.tex`](nutrition_label/Card.tex).
 
