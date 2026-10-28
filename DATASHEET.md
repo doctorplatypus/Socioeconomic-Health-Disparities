@@ -294,6 +294,11 @@ Step 4: The draft states that match counts are printed after the join (air rows,
 
 **Nutrition label:** [Open Air Chicago label PDF](nutrition_label/nutrition.pdf). Source: [`nutrition_label/main.tex`](nutrition_label/main.tex) and [`nutrition_label/Card.tex`](nutrition_label/Card.tex).
 
+
+
+
+**Population label:** [Population label PDF](population/Chicago_Community_Population_Overleaf_Project.pdf). Source: [`population/main.tex`](population/main.tex) and [`population/Card.tex`](population/Card.tex).
+
 ## Sources
 
 1. [City of Chicago Data Portal, Open Air Chicago Day Aggregations](https://data.cityofchicago.org/Health-Human-Services/Open-Air-Chicago-Day-Aggregations/rtmx-vkjr/about_data), `rtmx-vkjr` (analyzed API extract retrieved 2026-10-27).
