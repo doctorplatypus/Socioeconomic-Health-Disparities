@@ -308,15 +308,3 @@ Step 4: The draft states that match counts are printed after the join (air rows,
 10. [TODO relevant group member: direct City portal terms URL explaining Open Air redistribution, if not already linked in source].
 11. [TODO all: additional methodology/codebook references that substantiate exact income brackets and joint analysis].
 
-## Group integration checklist
-
-- [x] Andrew's Community Population research inserted from group CSV, Atlas documentation, and EDA notebook. **Group review and exact indicator mapping still required.**
-- [ ] Community Population detailed field definitions and indicator mapping reviewed by another group member; codebook draft already inserted.
-- [ ] Claudia/Jesus's Open Air codebook, ethics, cleaning and spatial-join steps reviewed and completed.
-- [ ] Anirudh's cross-dataset reproducible join and count ledger inserted.
-- [ ] **All** placeholder items removed or explicitly explained as genuinely unknown.
-- [ ] Data snapshots, file paths, column names, observation dates and counts consistent with notebooks.
-- [ ] Privacy, collection limits, licensing/terms and potential misuse reviewed.
-- [ ] Existing `README.md` updated to link `DATASHEET.md`.
-- [ ] Open Air nutrition label reviewed against final group snapshot; decide whether a separate **Community Population label** is required for Andrew's assigned part.
-- [ ] All five members reviewed the submission and made a Git contribution; applicable course AI-use rules followed.
