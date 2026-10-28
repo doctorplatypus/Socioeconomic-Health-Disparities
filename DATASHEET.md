@@ -217,7 +217,7 @@ Step 4: Match counts are printed after the join, total air rows, matched rows, u
 
 # Part I. Nutrition label, references and group sign-off
 
-**Nutrition label:** [Open Air Chicago label PDF](nutrition_label/main.pdf). Source: [`nutrition_label/main.tex`](nutrition_label/main.tex) and [`nutrition_label/Card.tex`](nutrition_label/Card.tex).
+**Nutrition label:** [Open Air Chicago label PDF](nutrition_label/nutrition.pdf). Source: [`nutrition_label/main.tex`](nutrition_label/main.tex) and [`nutrition_label/Card.tex`](nutrition_label/Card.tex).
 
 ## Sources
 
