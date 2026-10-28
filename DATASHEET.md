@@ -292,12 +292,14 @@ Step 4: The draft states that match counts are printed after the join (air rows,
 
 # Part I. Nutrition label, references
 
-**Nutrition label:** [Open Air Chicago label PDF](nutrition_label/nutrition.pdf). Source: [`nutrition_label/main.tex`](nutrition_label/main.tex) and [`nutrition_label/Card.tex`](nutrition_label/Card.tex).
+**Nutrition label:** 
+
+[Open Air Chicago label PDF](nutrition_label/nutrition.pdf). Source: [`nutrition_label/main.tex`](nutrition_label/main.tex) and [`nutrition_label/Card.tex`](nutrition_label/Card.tex).
 
 
 
 
-**Population label:** [Population label PDF](population/Chicago_Community_Population_Overleaf_Project.pdf). Source: [`population/main.tex`](population/main.tex) and [`population/Card.tex`](population/Card.tex).
+ [Population label PDF](population/Chicago_Community_Population_Overleaf_Project.pdf). Source: [`population/main.tex`](population/main.tex) and [`population/Card.tex`](population/Card.tex).
 
 ## Sources
 
