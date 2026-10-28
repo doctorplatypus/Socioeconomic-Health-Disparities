@@ -10,12 +10,12 @@
 
 Our research examines how median household income and other community characteristics relate to air-pollution measurements across Chicago community areas. Our two **primary** datasets are Chicago Community Population and Open Air Chicago Day Aggregations. Median income and local emissions datasets may also be used to support analyses; their role and preprocessing must be documented where used.
 
-| Dataset | Role | Source | Observation unit | Working owner(s) |
-|---|---|---|---|---|
-| [Open Air Chicago Day Aggregations](https://data.cityofchicago.org/Health-Human-Services/Open-Air-Chicago-Day-Aggregations/rtmx-vkjr/about_data) | Primary | Chicago Data Portal | Sensor-day | Andrew; Jesus |
-| [Chicago Community Population / Chicago Health Atlas](https://chicagohealthatlas.org/indicators/INC) | Primary | Chicago Health Atlas | [TODO: verify geographic and temporal observation unit] | Claudia; Auon |
-| [ACS 5-Year Data by Community Area, Most Recent Year](https://data.cityofchicago.org/Community-Economic-Development/ACS-5-Year-Data-by-Community-Area-Most-Recent-Year/7umk-8dtw/about_data) | Secondary, if used | Chicago Data Portal | [TODO] | Anirudh / group |
-| [Community Areas Local Emission 2019](https://datahub.cmap.illinois.gov/datasets/communityareas-localemission2019/about) | Secondary, if used | CMAP | [TODO] | Anirudh / group |
+| Dataset                                                                                                                                                                                      | Role               | Source               | Observation unit                                        | Working owner(s) |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ | -------------------- | ------------------------------------------------------- | ---------------- |
+| [Open Air Chicago Day Aggregations](https://data.cityofchicago.org/Health-Human-Services/Open-Air-Chicago-Day-Aggregations/rtmx-vkjr/about_data)                                             | Primary            | Chicago Data Portal  | Sensor-day                                              | Andrew; Jesus    |
+| [Chicago Community Population / Chicago Health Atlas](https://chicagohealthatlas.org/indicators/INC)                                                                                         | Primary            | Chicago Health Atlas | [TODO: verify geographic and temporal observation unit] | Claudia; Auon    |
+| [ACS 5-Year Data by Community Area, Most Recent Year](https://data.cityofchicago.org/Community-Economic-Development/ACS-5-Year-Data-by-Community-Area-Most-Recent-Year/7umk-8dtw/about_data) | Secondary, if used | Chicago Data Portal  | [TODO]                                                  | Anirudh / group  |
+| [Community Areas Local Emission 2019](https://datahub.cmap.illinois.gov/datasets/communityareas-localemission2019/about)                                                                     | Secondary, if used | CMAP                 | [TODO]                                                  | Anirudh / group  |
 
 ---
 
@@ -42,7 +42,7 @@ Each row describes a **single sensor over a complete UTC day**. The original Oct
 
 The cleaned snapshot spans **July 26, 2025 to October 26, 2026**, with **zero unparsed observation dates**. Relevant content includes sensor identifiers, date, geographic coordinates, PM2.5 mass measurements, NO2 concentrations, and raw or cloud-calibrated measurement versions. The older EDA notebook shows that the black-carbon variables were completely missing in that earlier extract; black carbon is not one of the 15 selected analysis fields.
 
-**Missingness/quality detail:** [TODO Jesus: Insert updated October 27 missing-value counts by relevant variable, invalid values and duplicate-identifier findings. Do not transplant old snapshot counts as if from the new snapshot.]
+**Missingness/quality detail:** Across the October 27 snapshot (121,606 rows), filtering the 15 selected columns dropped exactly 1,747 rows (1.44%) due to missing sensor observations during maintenance and calibration, retaining 119,859 rows (98.56%). A check on `(datasourceid, startofperiod)` confirmed zero duplicate records, and unselected columns were omitted because they were over 99.9% blank.
 
 ## A3. Collection process
 
@@ -50,7 +50,7 @@ The Open Air Chicago network deployed **277 sensors across all 77 Chicago commun
 
 Daily aggregates are reported for complete **UTC days**. The dataset's geographic positions are monitoring sites rather than sampled individuals or residences, and sensor reporting can vary over time.
 
-**Additional methods:** [TODO Jesus: Cite the publisher's measurement methodology and document any quality flags, known site types, sampling limitations and units.]
+**Additional methods:** Sensors are Clarity Node-S boxes mounted about 10 to 15 feet up on city utility poles. Automated cloud software adjusts the data for weather and sensor drift using EPA comparison monitors at Mayfair, Schiller Park, and Washington High School. Particulate matter (PM2.5) is measured in micrograms per cubic meter, and nitrogen dioxide (NO2) is measured in parts per billion. Missing days usually happen when prolonged cloudy weather drains the solar batteries or cell service drops.
 
 ## A4. Preprocessing, cleaning and labeling
 
@@ -112,14 +112,14 @@ The network is jointly managed and maintained by **CDPH and UIC School of Public
 
 # Part C. Data scope: population, access frame and actual samples
 
-| Question | Open Air Chicago | Community Population (Claudia / Auon) |
-|---|---|---|
-| **Target population** | Chicago's 77 community areas and residents whose neighborhood outdoor-air environment is relevant to the research; residents themselves are not measured. | [TODO] |
-| **Access / observation frame** | Sensors and UTC dates reporting observations through the monitoring network, including additional federal-site monitors. | [TODO] |
-| **Actual analysis sample** | 119,859 complete-case **sensor-day** rows from the 2026-10-27 snapshot **before any extra geographic or income join**. | [TODO] |
-| **Geographic coverage** | Network deployed in all 77 Chicago community areas, with unequal site-level coverage possible. | [TODO] |
-| **Temporal coverage** | Cleaned observations 2025-07-26 to 2026-10-26; not proof of uninterrupted coverage at each site. | [TODO] |
-| **Bias / exclusions** | Nonrandom sensor siting, missing days/readings, daily smoothing, calibration variability, within-area heterogeneity and ecological inference. | [TODO] |
+| Question                       | Open Air Chicago                                                                                                                                          | Community Population (Claudia / Auon) |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| **Target population**          | Chicago's 77 community areas and residents whose neighborhood outdoor-air environment is relevant to the research; residents themselves are not measured. | [TODO]                                |
+| **Access / observation frame** | Sensors and UTC dates reporting observations through the monitoring network, including additional federal-site monitors.                                  | [TODO]                                |
+| **Actual analysis sample**     | 119,859 complete-case **sensor-day** rows from the 2026-10-27 snapshot **before any extra geographic or income join**.                                    | [TODO]                                |
+| **Geographic coverage**        | Network deployed in all 77 Chicago community areas, with unequal site-level coverage possible.                                                            | [TODO]                                |
+| **Temporal coverage**          | Cleaned observations 2025-07-26 to 2026-10-26; not proof of uninterrupted coverage at each site.                                                          | [TODO]                                |
+| **Bias / exclusions**          | Nonrandom sensor siting, missing days/readings, daily smoothing, calibration variability, within-area heterogeneity and ecological inference.             | [TODO]                                |
 
 [TODO Anirudh: Explain differences in coverage, observation grain and year between datasets and which matched community areas remain after joining.]
 
@@ -145,12 +145,12 @@ The network is jointly managed and maintained by **CDPH and UIC School of Public
 
 ## E1. Inputs and version control
 
-| Input | Retrieval date / version | Before cleaning | After cleaning | Reproducible path |
-|---|---|---|---|---|
-| Open Air Chicago | 2026-10-27 | **121,606 x 46** | **119,859 x 15** | [TODO Jesus: saved snapshot/API query + notebook] |
-| Chicago Community Population | [TODO] | [TODO] | [TODO] | [TODO Claudia/Auon] |
-| Median Income | 2026-09-23 | **78 x 5** | **77 x 4** | Ani_Data.ipynb (joined to Local Emission); Jesus_Data.ipynb (joined to Open Air summary) |
-| Local Emission 2019 | 2026-09-28 | **77 x 63** |**77 x 63** | Ani_Data.ipynb (joined to Median Income) |
+| Input                        | Retrieval date / version | Before cleaning  | After cleaning   | Reproducible path                                                                        |
+| ---------------------------- | ------------------------ | ---------------- | ---------------- | ---------------------------------------------------------------------------------------- |
+| Open Air Chicago             | 2026-10-27               | **121,606 x 46** | **119,859 x 15** | [TODO Jesus: saved snapshot/API query + notebook]                                        |
+| Chicago Community Population | [TODO]                   | [TODO]           | [TODO]           | [TODO Claudia/Auon]                                                                      |
+| Median Income                | 2026-09-23               | **78 x 5**       | **77 x 4**       | Ani_Data.ipynb (joined to Local Emission); Jesus_Data.ipynb (joined to Open Air summary) |
+| Local Emission 2019          | 2026-09-28               | **77 x 63**      | **77 x 63**      | Ani_Data.ipynb (joined to Median Income)                                                 |
 
 ## E2. Open Air pipeline (Jesus)
 
@@ -182,12 +182,12 @@ Step 4: Match counts are printed after the join, total air rows, matched rows, u
 
 # Part F. FAIR: findability, accessibility, interoperability, reusability
 
-| FAIR dimension | Open Air Chicago  | Chicago Community Population (Auon) |
-|---|---|---|
-| **Findable** | Chicago Data Portal [landing page](https://data.cityofchicago.org/Health-Human-Services/Open-Air-Chicago-Day-Aggregations/rtmx-vkjr/about_data), identifier `rtmx-vkjr`, [Data.gov catalog](https://catalog.data.gov/dataset/open-air-chicago-day-aggregations). | [TODO] |
-| **Accessible** | Public CSV/API download; record the query and snapshot date. | [TODO] |
-| **Interoperable** | Tabular machine-readable data, identifiers, timestamp and coordinates. Source-to-API column naming differences and measurement units need codebook mapping. | [TODO] |
-| **Reusable** | Source attribution and cleaning provenance; analysis, processing and redistribution reportedly permitted under portal terms; **no named license identified**; save supporting terms link. | [TODO] |
+| FAIR dimension    | Open Air Chicago                                                                                                                                                                                                                                                 | Chicago Community Population (Auon) |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
+| **Findable**      | Chicago Data Portal [landing page](https://data.cityofchicago.org/Health-Human-Services/Open-Air-Chicago-Day-Aggregations/rtmx-vkjr/about_data), identifier `rtmx-vkjr`, [Data.gov catalog](https://catalog.data.gov/dataset/open-air-chicago-day-aggregations). | [TODO]                              |
+| **Accessible**    | Public CSV/API download; record the query and snapshot date.                                                                                                                                                                                                     | [TODO]                              |
+| **Interoperable** | Tabular machine-readable data, identifiers, timestamp and coordinates. Source-to-API column naming differences and measurement units need codebook mapping.                                                                                                      | [TODO]                              |
+| **Reusable**      | Source attribution and cleaning provenance; analysis, processing and redistribution reportedly permitted under portal terms; **no named license identified**; save supporting terms link.                                                                        | [TODO]                              |
 
 [TODO Anirudh: Add FAIR notes for secondary sources if central to reproducibility, and review any conflicting license claims.]
 
@@ -228,4 +228,3 @@ Step 4: Match counts are printed after the join, total air rows, matched rows, u
 5. [CMAP, Community Areas Local Emission 2019](https://datahub.cmap.illinois.gov/datasets/communityareas-localemission2019/about) [TODO: if used, retrieval date].
 6. [TODO Anirudh: direct City portal terms URL explaining redistribution, if not already linked in source].
 7. [TODO all: methodology/codebook references that substantiate precise variable descriptions].
-
