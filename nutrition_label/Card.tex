@@ -1,0 +1,50 @@
+% Included by main.tex. BookCorpus-style nutrition label.
+\begingroup
+\renewcommand{\arraystretch}{1.12}
+\setlength{\tabcolsep}{5pt}
+\newcommand{\nfrow}[2]{\textbf{#1}\hfill #2\\}
+\newcommand{\nfsection}[1]{\NFRULE\multicolumn{1}{l}{\scriptsize #1}\\\NFrule}
+\begin{tabular}{@{\hspace{5pt}}p{\NFwidth}@{\hspace{5pt}}}
+\toprule
+\NFtitle\\
+\NFrule
+\textbf{Dataset} Open Air Chicago Day Aggregations\\
+\nfrow{Original dataset}{121,606 rows; 46 columns}
+\nfrow{Analysis sample}{119,859 rows; 15 columns}
+\nfsection{Motivation}
+\nfrow{Project leads}{CDPH and UIC School of Public Health}
+\nfrow{Purpose}{Community air-quality monitoring}
+\nfrow{Grant 1}{NIST 60NANB23D206 (2023--2026)}
+\nfrow{Grant 2}{ComEd / Exelon / RHP (2025--2026)}
+\nfsection{Composition}
+\nfrow{Observation unit}{One sensor per UTC day}
+\nfrow{Period}{Jul 26, 2025 -- Oct 26, 2026}
+\nfrow{Coverage}{All 77 Chicago community areas}
+\nfrow{Main pollutants}{PM2.5 and NO2}
+\nfrow{Rows excluded}{1,747 with missing selected values}
+\nfsection{Collection}
+\nfrow{Network}{277 deployed sensors}
+\nfrow{Additional sites}{Federal monitoring-site sensors}
+\nfrow{Measurement method}{Clarity air-quality sensors}
+\nfsection{Cleaning and Labeling}
+\nfrow{Quality control}{Automated sensor data checks}
+\nfrow{Calibration}{Raw and cloud-calibrated values}
+\nfrow{Analysis choice}{Calibrated values; PM2.5 mass}
+\nfrow{Aggregation}{Complete UTC-day averages}
+\nfsection{Uses and Distribution}
+\nfrow{Uses}{Neighborhood comparisons and trends}
+\nfrow{Access}{Public CSV and API}
+\nfrow{Reuse}{Processing and redistribution permitted}
+\nfrow{License}{No specific license identified}
+\nfsection{Maintenance and Evolution}
+\nfrow{Maintainers}{CDPH and UIC School of Public Health}
+\nfrow{Update schedule}{Daily; previous-day statistics}
+\nfrow{Snapshot retrieved}{Oct 27, 2026}
+\NFRULE
+\textbf{Limitations} Non-regulatory sensors and daily averages cannot\\
+establish an individual's exact exposure; locations are sampled.\\
+\NFrule
+\scriptsize\textit{Source: Chicago Data Portal (rtmx-vkjr); counts from student API analysis.}\\
+\bottomrule
+\end{tabular}
+\endgroup
