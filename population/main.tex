@@ -1,0 +1,27 @@
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[margin=0.75in]{geometry}
+\hypersetup{colorlinks=true,urlcolor=blue,pdftitle={Chicago Community Population - Dataset Nutrition Label}}
+\pagestyle{empty}
+\newlength{\NFwidth}
+\setlength{\NFwidth}{5.00in}
+\newcommand{\NFtitle}{\multicolumn{1}{c}{\fontsize{24}{26}\selectfont\bfseries Dataset Facts}}
+\newcommand{\NFRULE}{\midrule[3.3pt]}
+\newcommand{\NFrule}{\midrule[0.65pt]}
+\begin{document}
+\begin{center}
+  \input{Card}
+\end{center}
+\vspace{0.35em}
+\noindent\begin{minipage}{0.96\linewidth}
+\footnotesize
+\textbf{Provenance:} Group's custom 30-column Chicago Health Atlas CSV (`Chicago\_Community\_Population\_Data.csv`), validated against the group's EDA documentation. POP/PCT/INC pages describe related indicators but do not verify every field in the custom export.\\[0.3em]
+\textbf{Sources:} \href{https://chicagohealthatlas.org/}{Chicago Health Atlas}; \href{https://chicagohealthatlas.org/indicators/POP}{Population (POP)}; \href{https://chicagohealthatlas.org/indicators/PCT}{Demographics (PCT)}; \href{https://chicagohealthatlas.org/indicators/INC}{Income (INC)}.\\[0.3em]
+\textbf{Reporting caution:} The source CSV says \texttt{ACS Year = 2023}, but its precise ACS multi-year reporting period and the release/version used for the custom export have not been established. The Atlas's current standalone POP export is \emph{not} numerically identical to the team's custom CSV.
+\end{minipage}
+\end{document}
