@@ -149,8 +149,8 @@ The network is jointly managed and maintained by **CDPH and UIC School of Public
 |---|---|---|---|---|
 | Open Air Chicago | 2026-10-27 | **121,606 x 46** | **119,859 x 15** | [TODO Jesus: saved snapshot/API query + notebook] |
 | Chicago Community Population | [TODO] | [TODO] | [TODO] | [TODO Claudia/Auon] |
-| Median Income (if joined) | [TODO] | [TODO] | [TODO] | [TODO Anirudh] |
-| Local Emission 2019 (if joined) | [TODO] | [TODO] | [TODO] | [TODO Anirudh] |
+| Median Income | 2026-09-23 | **78 x 5** | **77 x 4** | Ani_Data.ipynb (joined to Local Emission); Jesus_Data.ipynb (joined to Open Air summary) |
+| Local Emission 2019 | 2026-09-28 | **77 x 63** |**77 x 63** | Ani_Data.ipynb (joined to Median Income) |
 
 ## E2. Open Air pipeline (Jesus)
 
@@ -168,7 +168,15 @@ The network is jointly managed and maintained by **CDPH and UIC School of Public
 
 ## E4. Joins across sources (Anirudh)
 
-[TODO: Show exact join keys, normalization, spatial lookup provenance, time alignment, left/inner join type, counts before and after **each** join, match rate, unmatched Chicago community areas, duplicate-key checks and notebook reproducibility. **A hash modulo 77 is not a valid geographic assignment.**]
+The Open Air Chicago sensor data (primary) is joined to the community-level secondary datasets (median income, local emissions) in two steps.
+
+Step 1: Each sensor is mapped to a Chicago community area. The community name is extracted from the sensor_name field by removing the trailing number (e.g. "Near West Side 7" becomes "NEAR WEST SIDE") and converting to uppercase.
+
+Step 2: The COMMUNITY field in the local emissions dataset is also converted to uppercase and trimmed, so both sides use the same format.
+
+Step 3: A left join is performed on this standardized community name, keeping all sensor rows and attaching income and emissions data (INCOME, ONROAD_CO2) where a match exists.
+
+Step 4: Match counts are printed after the join, total air rows, matched rows, unmatched rows, and matched/unmatched sensor and community area counts, to track how much data was lost in the join.
 
 ---
 

@@ -1,0 +1,130 @@
+% CS 418 Open Air Chicago: Dataset Nutrition Label
+
+% TEAM VERIFICATION BEFORE SUBMISSION:
+%   117,892 rows x 46 columns, Sept 1, 2025 - Oct 14, 2026.
+%  The EDA notebook shows a DIFFERENT earlier API extract (117,320 rows) and
+%   115,655 rows after select(15 columns).drop_nulls(). 
+% - The notes' start date is Sep 1, 2025, the EDA notebook contains an example
+%   from Jul 26, 2025.
+
+\documentclass[10pt,letterpaper]{article}
+\usepackage[margin=0.81in,top=0.71in,bottom=0.70in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{array,tabularx,ragged2e}
+\usepackage{microtype}
+\usepackage[unicode,colorlinks=true,urlcolor=blue,linkcolor=black]{hyperref}
+\usepackage{enumitem}
+\pagestyle{empty}
+
+\newcommand{\DatasetName}{Open Air Chicago Day Aggregations}
+\newcommand{\SnapshotDate}{October 14, 2026}
+\newcommand{\SnapshotRows}{117,892}
+\newcommand{\OriginalColumns}{46}
+\newcommand{\SelectedColumns}{15}
+
+\newcommand{\thinrule}{\par\noindent\rule{\linewidth}{0.45pt}\par}
+\newcommand{\thickrule}{\par\noindent\rule{\linewidth}{3.5pt}\par}
+\newcommand{\secname}[1]{%
+  \vspace{2.4pt}\noindent{\small\textsc{#1}}\par\vspace{1.0pt}\thinrule\vspace{1.0pt}}
+\newcommand{\fact}[2]{#1 & #2\\[0.7pt]}
+
+\begin{document}
+\begin{center}
+  {\LARGE\bfseries Dataset Facts}\par
+\end{center}
+\vspace{-10pt}\thinrule
+\noindent\begin{tabularx}{\linewidth}{@{}>{\bfseries\raggedright\arraybackslash}p{0.38\linewidth} >{\RaggedLeft\arraybackslash}X@{}}
+  \fact{Dataset}{\DatasetName}
+  \fact{Team's source snapshot}{\SnapshotRows\ rows; \OriginalColumns\ columns (Oct. 14 notes)}
+  \fact{EDA selection}{\SelectedColumns\ columns; cleaned Oct. 14 row count not supplied}
+\end{tabularx}\par
+\vspace{5pt}\thickrule
+
+\secname{Motivation}
+\noindent\begin{tabularx}{\linewidth}{@{}>{\bfseries\raggedright\arraybackslash}p{0.38\linewidth} >{\RaggedLeft\arraybackslash}X@{}}
+  \fact{Creators}{CDPH and UIC School of Public Health}
+  \fact{Purpose}{Local PM\textsubscript{2.5}/NO\textsubscript{2} monitoring beyond federal AQI coverage}
+  \fact{Grant 1}{NIST grant 60NANB23D206 (2023--2026)}
+  \fact{Grant 2}{RHP Risk Management / ComEd / Exelon (2025--2026)}
+\end{tabularx}\par
+\vspace{5pt}\thickrule
+
+\secname{Composition}
+\noindent\begin{tabularx}{\linewidth}{@{}>{\bfseries\raggedright\arraybackslash}p{0.38\linewidth} >{\RaggedLeft\arraybackslash}X@{}}
+  \fact{Observation unit}{One sensor's 24-hour mean for one complete UTC day}
+  \fact{Time window}{Sep. 1, 2025--Oct. 14, 2026 (team-reported)}
+  \fact{Geographic reach}{Chicago community areas and federal monitoring sites}
+  \fact{Key pollutants}{PM\textsubscript{2.5} and nitrogen dioxide (NO\textsubscript{2})}
+  \fact{Known missingness}{Black-carbon modules offline; invalid readings excluded entirely}
+\end{tabularx}\par
+\vspace{5pt}\thickrule
+
+\secname{Collection Process}
+\noindent\begin{tabularx}{\linewidth}{@{}>{\bfseries\raggedright\arraybackslash}p{0.38\linewidth} >{\RaggedLeft\arraybackslash}X@{}}
+  \fact{Monitoring network}{277 non-regulatory sensors (summer 2025)}
+  \fact{Method}{Clarity sensors; 00:00--23:59:59 UTC averages}
+  \fact{Extra modules}{Six sensors also measure black carbon and local weather}
+  \fact{Other locations}{Federal monitoring sites for comparison/calibration}
+\end{tabularx}\par
+\vspace{5pt}\thickrule
+
+\secname{Preprocessing}
+\noindent\begin{tabularx}{\linewidth}{@{}>{\bfseries\raggedright\arraybackslash}p{0.38\linewidth} >{\RaggedLeft\arraybackslash}X@{}}
+  \fact{Publisher checks}{Automated Clarity quality-control screening}
+  \fact{Direct readings}{Temperature, humidity and wind need no cloud correction}
+  \fact{Calibration}{PM\textsubscript{2.5}/NO\textsubscript{2}: \texttt{.raw} vs cloud-calibrated \texttt{.value}}
+  \fact{EDA cleaning}{15 columns kept; incomplete rows dropped in notebook}
+\end{tabularx}\par
+\vspace{5pt}\thickrule
+
+\secname{Uses and Distribution}
+\noindent\begin{tabularx}{\linewidth}{@{}>{\bfseries\raggedright\arraybackslash}p{0.38\linewidth} >{\RaggedLeft\arraybackslash}X@{}}
+  \fact{Appropriate uses}{Neighborhood trends, research and federal-data comparisons}
+  \fact{Not suitable for}{Regulatory findings or personal-exposure estimates}
+  \fact{Access}{Public Chicago Data Portal; CSV download and API}
+  \fact{License / terms}{No specific license identified; City disclaimer applies}
+\end{tabularx}\par
+\vspace{5pt}\thickrule
+
+\secname{Maintenance and Affected Communities}
+\noindent\begin{tabularx}{\linewidth}{@{}>{\bfseries\raggedright\arraybackslash}p{0.38\linewidth} >{\RaggedLeft\arraybackslash}X@{}}
+  \fact{Stewards}{CDPH / UIC SPH; City publishes}
+  \fact{Updates}{Daily; modification date shown on portal}
+  \fact{Team snapshot}{\SnapshotDate; portal accessed Oct. 27, 2026}
+  \fact{People / equity}{No personal records; polluted-area residents may be affected}
+\end{tabularx}\par
+\vspace{5pt}\thickrule
+
+\vspace{4pt}
+{\small\textbf{Limitations.} Values are non-regulatory, reflect sensor locations rather than personal exposure, and cover only reported/quality-checked sensor-days. Raw and calibrated pollutant values should not be conflated.}
+\par\vspace{6pt}\thinrule
+{\scriptsize\textit{Sources:} City of Chicago, \href{https://data.cityofchicago.org/Health-Human-Services/Open-Air-Chicago-Day-Aggregations/rtmx-vkjr/about_data}{Open Air Chicago Day Aggregations}; \href{https://catalog.data.gov/dataset/open-air-chicago-day-aggregations}{Data.gov metadata}; CS 418 team notes and \texttt{eda.ipynb}. Counts are snapshot-specific.}
+
+\clearpage
+\pagestyle{plain}
+\section*{Supporting documentation and source notes}
+\noindent\textbf{Dataset and provenance.} Open Air Chicago Day Aggregations is published by the City of Chicago. The project was developed by the Chicago Department of Public Health (CDPH) and the UIC School of Public Health (SPH), supported by an advisory board, neighborhood/grassroots organizations, and government partners. It provides more localized PM\textsubscript{2.5} and NO\textsubscript{2} information than the federal air-quality-index network alone. The publisher documents 277 non-regulatory network sensors and additional monitors at federal sites. Dr. Serap Erdal at UIC SPH received NIST and RHP Risk Management / ComEd / Exelon funding.\par
+\vspace{7pt}
+\noindent\textbf{Collection and missing data.} Each row is the mean for one sensor from 00:00 to 23:59:59 UTC. All network sensors monitor PM\textsubscript{2.5} and NO\textsubscript{2}; six also have black-carbon/weather modules, although the black-carbon modules were offline when the data launched. Temperature, humidity and wind are direct sensor values. For PM\textsubscript{2.5} and NO\textsubscript{2}, \texttt{.raw} is uncalibrated and \texttt{.value} is cloud-calibrated. Invalidated measurements are not in the public aggregate; separate high-resolution readings are publicly published, while invalidated data require a request.\par
+\vspace{7pt}
+\noindent\textbf{Analytical limitations.} The file captures reported, quality-checked sensor-days, not every place or personal exposure in Chicago. The observations cannot establish causation between income, emissions and health. These non-regulatory monitors should not be treated as legal compliance evidence or exact personal-exposure measures. Decisions based on these records could especially affect residents of heavily industrialized or polluted neighborhoods.\par
+\vspace{7pt}
+\noindent\textbf{Access, terms, and reuse.} CSV and API access are public on the Chicago Data Portal. Our group accessed the portal on October 27, 2026. No dataset-specific license was identified in the team's materials. The City's disclaimer requires derivative applications to display the notice below and honor any additional agency terms; do not assume unconditional rights to relicense processed data. The dataset is refreshed daily.\par
+\vspace{7pt}
+\noindent\textbf{City of Chicago disclaimer provided by the project team:}\par\smallskip
+\begingroup\small\itshape
+\noindent ``This site provides applications using data that has been modified for use from its original source, www.cityofchicago.org, the official website of the City of Chicago. The City of Chicago makes no claims as to the content, accuracy, timeliness, or completeness of any of the data provided at this site. The data provided at this site is subject to change at any time. It is understood that the data provided at this site is being used at one's own risk.''
+\endgroup\par
+\vspace{10pt}
+\noindent\textbf{Sources and links}\par
+\begin{itemize}[noitemsep,topsep=4pt,leftmargin=16pt]
+  \item \href{https://data.cityofchicago.org/Health-Human-Services/Open-Air-Chicago-Day-Aggregations/rtmx-vkjr/about_data}{City of Chicago - dataset and documentation}
+  \item \href{https://catalog.data.gov/dataset/open-air-chicago-day-aggregations}{Data.gov - metadata, funding, fields, and public distribution}
+  \item \href{https://www.chicago.gov/city/en/depts/cdph/supp_info/Environment/open-air-chicago.html}{CDPH - Open Air Chicago program page}
+  \item \href{https://www.chicago.gov/city/en/narr/foia/data_disclaimer.html}{City of Chicago - data disclaimer}
+  \item \href{https://data.cityofchicago.org/api/v3/views/rtmx-vkjr/export.csv?accessType=DOWNLOAD}{Original CSV export endpoint}
+  \item \href{https://github.com/doctorplatypus/Socioeconomic-Health-Disparities/blob/main/EDA-Files/eda.ipynb}{eda.ipynb} (Our group's EDA notebook on GitHub. Selection, Missing Value Filtering, Additional Aggregation)
+\end{itemize}
+\noindent\textbf{Unresolved reconciliation:} Our notes say \textbf{117,892} rows / 46 columns from Sep. 1, 2025 onward. The EDA notebook instead uses a \textbf{117,320}-row extract, \textbf{115,655} rows after 15-column complete-case filtering, and an example reading dated July 26, 2025. Its \textbf{985 matched / 15 unmatched} join counts are from a \textbf{1,000-row sample}; the unmatched names span across three federal colocation sites, not missing Chicago community areas. \par
+\end{document}
