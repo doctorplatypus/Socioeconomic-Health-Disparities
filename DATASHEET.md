@@ -12,8 +12,8 @@ Our research examines how median household income and other community characteri
 
 | Dataset | Role | Source | Observation unit | Working owner(s) |
 |---|---|---|---|---|
-| [Open Air Chicago Day Aggregations](https://data.cityofchicago.org/Health-Human-Services/Open-Air-Chicago-Day-Aggregations/rtmx-vkjr/about_data) | Primary | Chicago Data Portal | Sensor-day | Claudia; Jesus (confirm assignments) |
-| [Chicago Community Population / Chicago Health Atlas](https://chicagohealthatlas.org/indicators/POP) | Primary | Chicago Health Atlas custom CSV export | One Chicago community area; ACS reference year labeled 2023 | Andrew (research/EDA); further review by group |
+| [Open Air Chicago Day Aggregations](https://data.cityofchicago.org/Health-Human-Services/Open-Air-Chicago-Day-Aggregations/rtmx-vkjr/about_data) | Primary | Chicago Data Portal | Sensor-day | Claudia; Auon (confirm assignments) |
+| [Chicago Community Population / Chicago Health Atlas](https://chicagohealthatlas.org/indicators/POP) | Primary | Chicago Health Atlas custom CSV export | One Chicago community area; ACS reference year labeled 2023 | Andrew ; Jesus|
 | [ACS 5-Year Data by Community Area, Most Recent Year](https://data.cityofchicago.org/Community-Economic-Development/ACS-5-Year-Data-by-Community-Area-Most-Recent-Year/7umk-8dtw/about_data) | Secondary, if used | Chicago Data Portal | [TODO] | Anirudh / group |
 | [Community Areas Local Emission 2019](https://datahub.cmap.illinois.gov/datasets/communityareas-localemission2019/about) | Secondary, if used | CMAP | [TODO] | Anirudh / group |
 
