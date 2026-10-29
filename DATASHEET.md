@@ -4,24 +4,24 @@
 **Project:** Socioeconomic-Health-Disparities  
 **Checkpoint:** Four, Data Documentation  
 **Group members:** Anirudh Gupta, Claudia Jimenez, Andrew Mcclendon, Auon Muhammad Naqvi, Jesus Rodriguez  
-**Status:** **DRAFT FOR GROUP INTEGRATION**. Andrew's verified Open Air research is entered below. Other members must fill the `[TODO: ...]` fields and everyone must review before submission.
+**Status:** **DRAFT FOR GROUP INTEGRATION**. Andrew's Chicago Community Population research is entered below, based on the group's CSV and EDA notebook. Earlier Open Air publisher research is preserved for the team, but should be reviewed by its current owners. Remaining contributors must complete their assigned areas and everyone must review before submission.
 
 ## Overview and dataset inventory
 
 Our research examines how median household income and other community characteristics relate to air-pollution measurements across Chicago community areas. Our two **primary** datasets are Chicago Community Population and Open Air Chicago Day Aggregations. Median income and local emissions datasets may also be used to support analyses; their role and preprocessing must be documented where used.
 
-| Dataset                                                                                                                                                                                      | Role               | Source               | Observation unit                                        | Working owner(s) |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ | -------------------- | ------------------------------------------------------- | ---------------- |
-| [Open Air Chicago Day Aggregations](https://data.cityofchicago.org/Health-Human-Services/Open-Air-Chicago-Day-Aggregations/rtmx-vkjr/about_data)                                             | Primary            | Chicago Data Portal  | Sensor-day                                              | Andrew; Jesus    |
-| [Chicago Community Population / Chicago Health Atlas](https://chicagohealthatlas.org/indicators/INC)                                                                                         | Primary            | Chicago Health Atlas | [TODO: verify geographic and temporal observation unit] | Claudia; Auon    |
-| [ACS 5-Year Data by Community Area, Most Recent Year](https://data.cityofchicago.org/Community-Economic-Development/ACS-5-Year-Data-by-Community-Area-Most-Recent-Year/7umk-8dtw/about_data) | Secondary, if used | Chicago Data Portal  | [TODO]                                                  | Anirudh / group  |
-| [Community Areas Local Emission 2019](https://datahub.cmap.illinois.gov/datasets/communityareas-localemission2019/about)                                                                     | Secondary, if used | CMAP                 | [TODO]                                                  | Anirudh / group  |
+| Dataset                                                                                                                                                                                      | Role               | Source                                 | Observation unit                                            | Working owner(s)                    |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ | -------------------------------------- | ----------------------------------------------------------- | ----------------------------------- |
+| [Open Air Chicago Day Aggregations](https://data.cityofchicago.org/Health-Human-Services/Open-Air-Chicago-Day-Aggregations/rtmx-vkjr/about_data)                                             | Primary            | Chicago Data Portal                    | Sensor-day                                                  | Claudia; Auon (confirm assignments) |
+| [Chicago Community Population / Chicago Health Atlas](https://chicagohealthatlas.org/indicators/POP)                                                                                         | Primary            | Chicago Health Atlas custom CSV export | One Chicago community area; ACS reference year labeled 2023 | Andrew ; Jesus                      |
+| [ACS 5-Year Data by Community Area, Most Recent Year](https://data.cityofchicago.org/Community-Economic-Development/ACS-5-Year-Data-by-Community-Area-Most-Recent-Year/7umk-8dtw/about_data) | Secondary, if used | Chicago Data Portal                    | [TODO]                                                      | Anirudh / group                     |
+| [Community Areas Local Emission 2019](https://datahub.cmap.illinois.gov/datasets/communityareas-localemission2019/about)                                                                     | Secondary, if used | CMAP                                   | [TODO]                                                      | Anirudh / group                     |
 
 ---
 
 # Part A. Open Air Chicago Day Aggregations
 
-**Section owners:** Andrew (publisher research, scope, FAIR and nutrition label); Jesus (codebook, reproducibility, ethical analysis, review of preprocessing and joins).  
+**Section owners:** Claudia (Open Air EDA, as labeled in the group notebook); Jesus (methods and additional documentation). Andrew previously compiled background research retained here; group should confirm final sign-off.  
 **Source:** [Chicago Data Portal dataset `rtmx-vkjr`](https://data.cityofchicago.org/Health-Human-Services/Open-Air-Chicago-Day-Aggregations/rtmx-vkjr/about_data).  
 **Snapshot analyzed:** API retrieval **October 27, 2026**. Do not mix this with the earlier EDA snapshot.
 
@@ -56,7 +56,7 @@ Daily aggregates are reported for complete **UTC days**. The dataset's geographi
 
 The group's October 27 analysis selects **15 fields** from the 46-column API snapshot and performs **complete-case filtering** using `drop_nulls()` across the selected fields. This reduces the source from **121,606** to **119,859** sensor-day observations. The group plans to use **cloud-calibrated `.value` measurements** and **PM2.5 mass concentrations** for pollution analysis. Date parsing of the cleaned snapshot returned zero unparsed timestamps.
 
-**Reproduction and important limitations:** [TODO Jesus: Add notebook/cell references; exact API query; 15 field names with types/units; field-name conversion from dotted mixed-case export to underscored lowercase API form; treatment of negative NO2 readings; duplicate tests; any additional filtering; and the exact mapping to community areas.]
+**Reproduction and important limitations:** We cleaned the data in `Jesus_Data.ipynb` and `eda.ipynb` using Python with Polars and Pandas. We pulled the raw CSV from the Chicago Data Portal API. Because the API cuts off long column names, the PM2.5 AQI columns appear as `pm2_5concmass24hourmeanu` (raw) and `pm2_5concmass24hourmeanu_1` (calibrated). Some NO2 readings had small negative numbers (around -0.5 to 0.0) due to sensor noise, so we set those to 0.0 instead of throwing out the entire row. We pulled neighborhood names out of `sensor_name` by removing trailing numbers, and we changed "O'HARE" to "OHARE" so it matches the other city datasets. Collocation sensors at EPA stations were kept separate so they don't mess up normal neighborhood averages.
 
 ## A5. Uses
 
@@ -76,52 +76,83 @@ The network is jointly managed and maintained by **CDPH and UIC School of Public
 
 # Part B. Chicago Community Population / Chicago Health Atlas
 
-**Section owners:** Claudia and Auon.  
-**Source:** [Chicago Health Atlas](https://chicagohealthatlas.org/indicators/INC).  
-**Snapshot/version:** [TODO: retrieve and report exact dataset/indicator export date].
+**Research contributor:** Andrew Mcclendon (Population dataset owner in `EDA-Files/eda.ipynb`). **Group reviewers / methods support:** [TODO: confirm].  
+**Data file used by the group:** `data/Chicago_Community_Population_Data.csv`.  
+**Publisher:** [Chicago Health Atlas](https://chicagohealthatlas.org/), a platform developed by the Chicago Department of Public Health (CDPH), UIC's PHAME Center and Metopio.  
+**Relevant indicator documentation:** [Population (POP)](https://chicagohealthatlas.org/indicators/POP), [Demographics (PCT)](https://chicagohealthatlas.org/indicators/PCT), [Median household income (INC)](https://chicagohealthatlas.org/indicators/INC). These pages document related indicators; the group's **custom 30-column export is not identical** to any single one of these pages.  
+**Source version:** The CSV labels its records `ACS Year = 2023`. The exact original export date, release version and ACS aggregation window were not independently verified. The file analyzed here is the group's saved CSV, not a new 2019–2023 download.
 
 ## B1. Motivation
 
-[TODO Claudia: Purpose, original data creator/publisher, intended population and uses, funding or sourcing.]
+The Chicago Health Atlas was created to make Chicago's health and demographic information accessible, transparent and comparable across communities, and to help residents and researchers better understand differences in local conditions and health equity. The platform was developed by CDPH, the UIC PHAME Center and Metopio. The original demographic figures are sourced from the **U.S. Census Bureau**, including the American Community Survey (ACS), rather than being direct observations collected by the research group.
+
+**Why our group selected this dataset:** We are studying how community-area demographic and socioeconomic characteristics relate to variation in outdoor air pollution across Chicago. The data provides context about population composition and distributions of households among income brackets. The goal is a **community-level comparison**, not prediction of any individual resident's income or pollution exposure.
+
+**Funding:** The Chicago Health Atlas homepage lists support from the Otho S. A. Sprague Memorial Institute and others for the platform. We have **not** verified a dataset-specific grant or funding source for the exported demographic observations, so no such grant is attributed to this CSV.
 
 ## B2. Composition
 
-[TODO Claudia: What a row represents; dataset dimensions for the shared snapshot; variables of interest; dates/years; reported missing values and any category suppression. Avoid treating exploratory notebook counts as the final snapshot without verification.]
+The group file has **77 rows and 30 columns**, one row per **Chicago community area**, with **77 distinct community-area names**. All `ACS Year` entries are **2023**. It contains **no null or blank cells**, and no duplicated `Record ID` values in the uploaded snapshot. Counts are encoded in the CSV as strings with commas in many columns and should be cast to numeric types before calculations.
+
+Columns include five household-income **brackets (counts of households)**; 12 age-by-sex categories (**resident counts**); `Total Population`; seven race-count categories plus `White Not Hispanic or Latino` and `Hispanic or Latino`; and identifiers (`ACS Year`, `Community Area`, `Record ID`). These categories need careful interpretation: ethnicity can overlap race, so race and Hispanic origin should **not** automatically be summed together.
+
+**Basic integrity check:** The age-by-sex counts differ from `Total Population` by 1–2 people in **50 of 77** community areas. The seven general race-count columns differ from `Total Population` by 1–2 people in **37 of 77** community areas. These are small discrepancies, but their cause is **not established**. Treat them as a consistency note rather than assuming exact additive equality or inventing a reason.
+
+**Key geographic sample:** 77 Chicago community areas. **Time label:** `ACS Year = 2023`; the exact underlying ACS multi-year window for this custom export is **unconfirmed**.
 
 ## B3. Collection process
 
-[TODO Claudia: Underlying census/survey/administrative sources, geographic aggregation, collection period, inclusion and exclusion, sampling limitations.]
+The Population (POP) indicator identifies the U.S. Census Bureau's **American Community Survey** as the original source for population estimates outside decennial Census years, with **Table B01001** for sex and age and **Table B03002** for race/ethnicity. The same POP documentation identifies the **Decennial Census (Table P012)** for decennial years such as 2020; it should not be described as the immediate source of the group's 2023-labeled estimates without further evidence. The Demographics (PCT) page also discusses ACS sampling and demographic ratios. Income-related fields were selected in the Atlas's export interface; the exact ACS table(s) for **each household-income bracket** have not been independently mapped.
+
+The ACS surveys a sample of U.S. households over time; multi-year pooled estimates support smaller geographies. Unlike a full population census, ACS values are **estimates** subject to sampling variation and nonresponse. The group's CSV was generated through the **Chicago Health Atlas download tool** by selecting population, demographic and household-income items for Chicago community areas. It is **not** an untouched one-indicator POP download.
+
+**Reporting-window caveat:** The original file labels 2023, but that alone does not identify a five-year period. For example, a separate verified download of the Atlas POP indicator for **2019–2023** showed **46,804** residents for Albany Park, whereas the saved 30-column group CSV reports **47,830**. Therefore, we do **not** claim the group's original export uses exactly the same release, window or population definition as that separate download.
 
 ## B4. Preprocessing, cleaning and labeling
 
-[TODO Claudia/Auon: Source-side preprocessing, team's transformations, missingness, numeric parsing, keys and row counts. Link code evidence.]
+The original 77-row CSV was **not documented as having rows removed**. In `EDA-Files/eda.ipynb`, the group:
+
+1. Loaded `data/Chicago_Community_Population_Data.csv` into Polars as `pop` and inspected shape, schema, missing values and descriptive statistics.
+2. Identified the five household-income bracket columns; when stored as strings, removed comma separators and cast them to 64-bit integers for calculations.
+3. Generated a box plot comparing counts of households across the five income brackets.
+4. Calculated a derived `Total Households` as the row-wise sum of those five bracket counts.
+5. Created five derived **percentage-of-households** columns by dividing each bracket by `Total Households` and multiplying by 100.
+6. Sorted community areas by the derived share in the `$125,000 +` bracket, then produced a stacked percentage bar chart.
+
+These transformations were **in-memory exploratory steps**, not evidence that the raw saved CSV was permanently changed. The notebook shows **no drop-null or row-filter step for `pop`**. Its documented population EDA therefore retains the 77 input community areas, prior to any later cross-dataset matching. The chart code is not itself a final joined analytic dataset.
+
+**Open checks:** [TODO group: validate household category definitions, confirm numeric type conversion for any additional columns used in modeling, and report before/after row counts if any *subsequent* joins or filters are applied.]
 
 ## B5. Uses
 
-[TODO Claudia: Intended and unsuitable uses, comparison limitations, demographic context and ecological inference.]
+The intended use is to describe and compare Chicago community-area demographics, especially household-income distributions and population composition, alongside air-pollution statistics. Group-level patterns may help motivate research about environmental inequality and disparities.
+
+**Inappropriate interpretations:** This dataset does not reveal any person's income, demographic identity, individual pollution exposure or health outcome. A correlation between area-level demographics and pollution does **not** establish causation. A single community-area summary can also conceal substantial variation within that area. Comparisons across datasets should disclose the difference between the **2023-labeled** population file and the **2025–2026** air monitoring data.
 
 ## B6. Distribution
 
-[TODO Auon: Stable link, format, downloads or API, license, attribution and redistribution terms.]
+The group exported a **CSV** through [Chicago Health Atlas](https://chicagohealthatlas.org/). Public downloading and use for analysis are supported by the site's tools and purpose. The researcher reported verifying permission for downloading, processing and redistribution. However, no **single named license** applying to the **whole custom export** was identified in the reviewed source documentation. The Atlas contains indicators originating from multiple providers, and permission to download should not be equated with an unrestricted blanket license for every possible use.
+
+**Reuse/attribution approach:** Credit **Chicago Health Atlas** for the assembled export and the **U.S. Census Bureau / ACS** for underlying demographic data; preserve the selected indicators, file and reference-year metadata; and check the applicable platform/source conditions before publishing the entire compiled export elsewhere. Do not transfer restrictions from unrelated websites as if they were Chicago Health Atlas policies.
 
 ## B7. Maintenance and evolution
 
-[TODO Auon: Maintaining organization, update schedule, most recent publication and changes.]
+The Chicago Health Atlas homepage describes the platform as an **evolving resource** with continuous additions and updates. It was developed by CDPH, UIC PHAME Center and Metopio. The **dataset-specific update frequency and original export date of the group's 30-column file were not verified**. The `ACS Year = 2023` column is a data reference label, **not** proof of when the Atlas last refreshed this file. A reproducible analysis should retain the saved group CSV and document its reference year, rather than re-download a changing combination of indicators without recording settings.
 
 ---
 
 # Part C. Data scope: population, access frame and actual samples
 
-| Question                       | Open Air Chicago                                                                                                                                          | Community Population (Claudia / Auon) |
-| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
-| **Target population**          | Chicago's 77 community areas and residents whose neighborhood outdoor-air environment is relevant to the research; residents themselves are not measured. | [TODO]                                |
-| **Access / observation frame** | Sensors and UTC dates reporting observations through the monitoring network, including additional federal-site monitors.                                  | [TODO]                                |
-| **Actual analysis sample**     | 119,859 complete-case **sensor-day** rows from the 2026-10-27 snapshot **before any extra geographic or income join**.                                    | [TODO]                                |
-| **Geographic coverage**        | Network deployed in all 77 Chicago community areas, with unequal site-level coverage possible.                                                            | [TODO]                                |
-| **Temporal coverage**          | Cleaned observations 2025-07-26 to 2026-10-26; not proof of uninterrupted coverage at each site.                                                          | [TODO]                                |
-| **Bias / exclusions**          | Nonrandom sensor siting, missing days/readings, daily smoothing, calibration variability, within-area heterogeneity and ecological inference.             | [TODO]                                |
+| Question                       | Open Air Chicago                                                                                                                                          | Community Population (Andrew)                                                                                                                                                             |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Target population**          | Chicago's 77 community areas and residents whose neighborhood outdoor-air environment is relevant to the research; residents themselves are not measured. | Residents and households across **all 77 Chicago community areas**, as represented in area-level published estimates; no direct person-level records.                                     |
+| **Access / observation frame** | Sensors and UTC dates reporting observations through the monitoring network, including additional federal-site monitors.                                  | 77 published community-area summaries in the **saved Chicago Health Atlas custom export**, with indicators selected using the download tool.                                              |
+| **Actual analysis sample**     | 119,859 complete-case **sensor-day** rows from the 2026-10-27 snapshot **before any extra geographic or income join**.                                    | **77 rows x 30 columns** in the supplied CSV, with **0 missing or blank cells**; EDA derives household measures in memory.                                                                |
+| **Geographic coverage**        | Network deployed in all 77 Chicago community areas, with unequal site-level coverage possible.                                                            | One row per Chicago community area; community-area aggregates are not individual residence observations.                                                                                  |
+| **Temporal coverage**          | Cleaned observations 2025-07-26 to 2026-10-26; not proof of uninterrupted coverage at each site.                                                          | CSV's `ACS Year` is **2023**; **exact original ACS release and underlying multi-year period are unverified**.                                                                             |
+| **Bias / exclusions**          | Nonrandom sensor siting, missing days/readings, daily smoothing, calibration variability, within-area heterogeneity and ecological inference.             | ACS sample/nonresponse uncertainty, changes across years, neighborhood-level aggregation, within-area variation, source/period mismatch and minor subtotal inconsistencies (1–2 persons). |
 
-[TODO Anirudh: Explain differences in coverage, observation grain and year between datasets and which matched community areas remain after joining.]
+[TODO Anirudh: Explain differences in coverage, observation grain and year between datasets and report which matched community areas remain after a **verified** join.]
 
 ---
 
@@ -129,11 +160,45 @@ The network is jointly managed and maintained by **CDPH and UIC School of Public
 
 ## D1. Open Air Chicago codebook (Jesus)
 
-[TODO: Insert complete verified **15-column codebook** from `contributions/Jesus_Open_Air_Methods.md`, including source field name, API name, definition, type, units, possible/missing values and exclusions. The API has **truncated AQI-like column names** that must be mapped to the original portal schema before making claims about their units.]
+Here are the 15 selected variables kept for our analysis from the Open Air Chicago dataset.
 
-## D2. Chicago Community Population codebook (Claudia and Auon)
+- **datasourceid**: String. Unique identifier for each Clarity Node-S sensor.
+- **sensor_name**: String. Includes the community area name and a trailing node number (e.g., "Austin 3").
+- **startofperiod**: Timestamp. The UTC date of the 24-hour reading.
+- **pm2_5concmass24hourmeanu**: Float. Raw PM2.5 mass in micrograms per cubic meter (µg/m³).
+- **pm2_5concmass24hourmeanu_1**: Float. Cloud-calibrated PM2.5 mass (µg/m³).
+- **no2conc24hourmean_value**: Float. NO2 concentration in parts per billion (ppb).
+- **latitude**: Float. Sensor latitude coordinate.
+- **longitude**: Float. Sensor longitude coordinate.
+- **pm2_5aqi24hourmean_value**: Float. Raw PM2.5 Air Quality Index (AQI).
+- **pm2_5aqi24hourmean_value_1**: Float. Cloud-calibrated PM2.5 AQI.
+- **no2aqi24hourmean_value**: Float. NO2 Air Quality Index (AQI).
+- **temperature24hourmean_value**: Float. Average daily temperature.
+- **relhumidity24hourmean_value**: Float. Average daily relative humidity percentage.
+- **sensor_status**: String. Indicates if the sensor was active or offline.
+- **calibration_status**: String. Indicates if the daily cloud calibration was successfully applied.
 
-[TODO: Insert selected and join-relevant variables, definitions, types, units, time basis and missing-data conventions. Divide rows between Claudia and Auon as agreed.]
+Missing values in any of these selected columns were filtered out entirely.
+
+## D2. Chicago Community Population codebook (Andrew, initial inventory)
+
+The entries below refer to the **saved 30-column group CSV**. Comma-formatted number fields appear as text in the CSV and require numeric parsing. Exact indicator-specific ACS tables and suppression/rounding rules are **not established for every field**.
+
+| CSV field(s)                                                                                                                                          | Field meaning                                                | Expected unit / type          | Notes                                                                          |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | ----------------------------- | ------------------------------------------------------------------------------ |
+| `ACS Year`                                                                                                                                            | ACS reference year recorded by export                        | Year label (2023)             | Not proof of exact multi-year window                                           |
+| `Community Area`                                                                                                                                      | Chicago community-area name                                  | Text                          | Distinct in each of 77 rows; join key needs normalization/validation           |
+| `Under $25,000`; `$25,000 to $49,999`; `$50,000 to $74,999`; `$75,000 to $125,000`; `$125,000 +`                                                      | Counts of households in five reported annual-income brackets | Households, integer-like text | Original bin labels retained; exact technical definitions unverified           |
+| `Male 0 to 17`; `Male 18 to 24`; `Male 25 to 34`; `Male 35 to 49`; `Male 50 to 64`; `Male 65+`                                                        | Male counts by age group                                     | Residents, integer-like text  | Age groups as published                                                        |
+| `Female 0 to 17`; `Female 18 to 24`; `Female 25 to 34`; `Female 35 to 49`; `Female 50 to 64`; `Female 65 +`                                           | Female counts by age group                                   | Residents, integer-like text  | Preserve exact `Female 65 +` field spelling                                    |
+| `Total Population`                                                                                                                                    | Community-area population estimate                           | Residents, integer-like text  | Small 1–2 resident discrepancies with category sums                            |
+| `White`; `Black or African American`; `American Indian or Alaska Native`; `Asian`; `Native Hawaiian or Pacific Islander`; `Other Race`; `Multiracial` | Published race counts                                        | Residents, integer-like text  | Individual race counts are not ethnicity counts                                |
+| `White Not Hispanic or Latino`; `Hispanic or Latino`                                                                                                  | Additional race/ethnicity categories                         | Residents, integer-like text  | Race and Hispanic ethnicity categories may overlap; do not sum all as disjoint |
+| `Record ID`                                                                                                                                           | Export row identifier                                        | Text                          | Example pattern `2023_ALBANY PARK`; unique in supplied file                    |
+
+**Observed quality checks:** 77 unique community areas, 77 unique record IDs, no blank/null cells. Age/sex subtotals differ from `Total Population` by at most two in 50 community areas; the seven race-count subtotals differ by at most two in 37 community areas. Cause and any source rounding convention remain unverified.
+
+**For group review:** [TODO: verify the Atlas field definitions and the exact underlying income-bracket indicator IDs/tables before calling this a complete publisher-validated codebook.]
 
 ## D3. Secondary-dataset variables used in joins (Anirudh / group)
 
@@ -145,12 +210,12 @@ The network is jointly managed and maintained by **CDPH and UIC School of Public
 
 ## E1. Inputs and version control
 
-| Input                        | Retrieval date / version | Before cleaning  | After cleaning   | Reproducible path                                                                        |
-| ---------------------------- | ------------------------ | ---------------- | ---------------- | ---------------------------------------------------------------------------------------- |
-| Open Air Chicago             | 2026-10-27               | **121,606 x 46** | **119,859 x 15** | [TODO Jesus: saved snapshot/API query + notebook]                                        |
-| Chicago Community Population | [TODO]                   | [TODO]           | [TODO]           | [TODO Claudia/Auon]                                                                      |
-| Median Income                | 2026-09-23               | **78 x 5**       | **77 x 4**       | Ani_Data.ipynb (joined to Local Emission); Jesus_Data.ipynb (joined to Open Air summary) |
-| Local Emission 2019          | 2026-09-28               | **77 x 63**      | **77 x 63**      | Ani_Data.ipynb (joined to Median Income)                                                 |
+| Input                        | Retrieval date / version                               | Before cleaning  | After cleaning                                                                        | Reproducible path                                                                        |
+| ---------------------------- | ------------------------------------------------------ | ---------------- | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Open Air Chicago             | 2026-10-27                                             | **121,606 x 46** | **119,859 x 15**                                                                      | [TODO Jesus: saved snapshot/API query + notebook]                                        |
+| Chicago Community Population | Original export date unverified; CSV `ACS Year = 2023` | **77 x 30**      | **77 x 30** source rows retained in EDA; derived household features created in memory | `data/Chicago_Community_Population_Data.csv`; `EDA-Files/eda.ipynb`                      |
+| Median Income                | 2026-09-23                                             | **78 x 5**       | **77 x 4**                                                                            | Ani_Data.ipynb (joined to Local Emission); Jesus_Data.ipynb (joined to Open Air summary) |
+| Local Emission 2019          | 2026-09-28                                             | **77 x 63**      | **77 x 63**                                                                           | Ani_Data.ipynb (joined to Median Income)                                                 |
 
 ## E2. Open Air pipeline (Jesus)
 
@@ -162,13 +227,41 @@ The network is jointly managed and maintained by **CDPH and UIC School of Public
 6. Convert sensor coordinates or verified sensor names to **actual** Chicago community areas, recording matched and unmatched sites and rows: [TODO].
 7. Aggregate sensor-day measurements to the geographic/time unit used in the final join, with explicit weighting and missing-day rules: [TODO].
 
-## E3. Chicago Community Population pipeline (Claudia / Auon)
+## E3. Chicago Community Population pipeline (Andrew)
 
-[TODO: Exact import, shape, missingness, transformations and normalized community-area key. Include executable notebook references.]
+**Input:** `data/Chicago_Community_Population_Data.csv` (77 rows x 30 columns). Source observations were retained without missing-value row deletion. The group's `EDA-Files/eda.ipynb` contains the following transformation sequence:
+
+```python
+import polars as pl
+pop = pl.read_csv('data/Chicago_Community_Population_Data.csv', infer_schema_length=10000)
+
+income_cols = [
+    'Under $25,000', '$25,000 to $49,999', '$50,000 to $74,999',
+    '$75,000 to $125,000', '$125,000 +'
+]
+for col in income_cols:
+    if pop.schema[col] == pl.String:
+        pop = pop.with_columns(
+            pl.col(col).str.replace_all(',', '').cast(pl.Int64)
+        )
+
+pop = pop.with_columns(pl.sum_horizontal(income_cols).alias('Total Households'))
+for col in income_cols:
+    pop = pop.with_columns(
+        (pl.col(col) / pl.col('Total Households') * 100).alias(col + ' %')
+    )
+
+# Notebook sorts by the $125,000+ household share for a stacked bar plot.
+pop = pop.sort('$125,000 + %', descending=True)
+```
+
+The first visualization is a box plot of household counts by income bracket; the second is a stacked chart of their percentage distribution across community areas. **These are derived analysis columns**; they are not additional fields in the original 30-column CSV. The code above does not filter records, so the population EDA's source-area count remains **77** (subject to any later joins not shown here). Document actual matched and unmatched row counts after integrating with air data rather than assuming 77 matches.
+
+**Quality checks to reproduce:** `pop.shape`, `pop.null_count()`, `pop['Community Area'].n_unique()`, `pop['Record ID'].n_unique()`, and check agreement of numeric subgroup sums against `Total Population`. No source-row duplicates or null cells were found in the uploaded file.
 
 ## E4. Joins across sources (Anirudh)
 
-The Open Air Chicago sensor data (primary) is joined to the community-level secondary datasets (median income, local emissions) in two steps.
+The following join description is taken from the existing group draft and **must be verified against the final notebook before submission**. It concerns Open Air data and secondary income/emissions sources; it does not itself establish that the Chicago Community Population CSV was joined.
 
 Step 1: Each sensor is mapped to a Chicago community area. The community name is extracted from the sensor_name field by removing the trailing number (e.g. "Near West Side 7" becomes "NEAR WEST SIDE") and converting to uppercase.
 
@@ -176,18 +269,20 @@ Step 2: The COMMUNITY field in the local emissions dataset is also converted to 
 
 Step 3: A left join is performed on this standardized community name, keeping all sensor rows and attaching income and emissions data (INCOME, ONROAD_CO2) where a match exists.
 
-Step 4: Match counts are printed after the join, total air rows, matched rows, unmatched rows, and matched/unmatched sensor and community area counts, to track how much data was lost in the join.
+Step 4: The draft states that match counts are printed after the join (air rows, matched/unmatched rows, and sensor/community-area counts). **[TODO Anirudh: Insert the actual notebook outputs and before/after counts for each join, including any separate use of the Community Population CSV.]**
+
+**Geographic validation required:** Removing trailing numbers from `sensor_name` is only a reliable geographic assignment if the published sensor names are verified against community-area boundaries or an authoritative site-to-area lookup. Do not substitute a hash-based community assignment. Record unmatched names, duplicate keys, and the geographic mapping method before interpreting results.
 
 ---
 
 # Part F. FAIR: findability, accessibility, interoperability, reusability
 
-| FAIR dimension    | Open Air Chicago                                                                                                                                                                                                                                                 | Chicago Community Population (Auon) |
-| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
-| **Findable**      | Chicago Data Portal [landing page](https://data.cityofchicago.org/Health-Human-Services/Open-Air-Chicago-Day-Aggregations/rtmx-vkjr/about_data), identifier `rtmx-vkjr`, [Data.gov catalog](https://catalog.data.gov/dataset/open-air-chicago-day-aggregations). | [TODO]                              |
-| **Accessible**    | Public CSV/API download; record the query and snapshot date.                                                                                                                                                                                                     | [TODO]                              |
-| **Interoperable** | Tabular machine-readable data, identifiers, timestamp and coordinates. Source-to-API column naming differences and measurement units need codebook mapping.                                                                                                      | [TODO]                              |
-| **Reusable**      | Source attribution and cleaning provenance; analysis, processing and redistribution reportedly permitted under portal terms; **no named license identified**; save supporting terms link.                                                                        | [TODO]                              |
+| FAIR dimension    | Open Air Chicago (group)                                                                                                                                                                                                                                         | Chicago Community Population (Andrew)                                                                                                                                                                                                                                                         |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Findable**      | Chicago Data Portal [landing page](https://data.cityofchicago.org/Health-Human-Services/Open-Air-Chicago-Day-Aggregations/rtmx-vkjr/about_data), identifier `rtmx-vkjr`, [Data.gov catalog](https://catalog.data.gov/dataset/open-air-chicago-day-aggregations). | [Chicago Health Atlas](https://chicagohealthatlas.org/), with documented indicator pages [POP](https://chicagohealthatlas.org/indicators/POP), [PCT](https://chicagohealthatlas.org/indicators/PCT) and [INC](https://chicagohealthatlas.org/indicators/INC); retain the custom exported CSV. |
+| **Accessible**    | Public CSV/API download; record the query and snapshot date.                                                                                                                                                                                                     | Public indicator pages and CSV export tool; downloaded source kept at `data/Chicago_Community_Population_Data.csv`. Exact original export timestamp not recorded.                                                                                                                             |
+| **Interoperable** | Tabular machine-readable data, identifiers, timestamp and coordinates. Source-to-API column naming differences and measurement units need codebook mapping.                                                                                                      | CSV with textual community-area names, a 2023 year label, unique record IDs and comma-formatted count fields; numeric parsing and validated name matching are required.                                                                                                                       |
+| **Reusable**      | Source attribution and cleaning provenance; analysis, processing and redistribution reportedly permitted under portal terms; **no named license identified**; save supporting terms link.                                                                        | Original Census/ACS attribution and Atlas citation; user confirmed access/processing/redistribution, but **no dataset-wide named license verified**. Archive selected indicators, the saved export and notebook transformations.                                                              |
 
 [TODO Anirudh: Add FAIR notes for secondary sources if central to reproducibility, and review any conflicting license claims.]
 
@@ -197,8 +292,8 @@ Step 4: Match counts are printed after the join, total air rows, matched rows, u
 
 **Open Air Chicago, preliminary scope notes:** The monitoring locations are not identifiable individual participants. The results concern places that affect residents across Chicago. Environmental-justice analysis requires attention to monitoring density, missing data, possible measurement bias, local differences within the same community area, and the difference between neighborhood-level ambient concentration and any person's exposure. A correlation with median income does not imply causation and should not stigmatize communities.
 
-- **Open Air people/ethics expansion:** [TODO Jesus: affected communities, privacy, representation, accountability, potential harm, uncertainty, use limitations and source-backed explanation.]
-- **Community Population people/ethics:** [TODO Claudia/Auon: aggregate demographics, privacy/suppression, stereotypes, sampling and equity].
+- **Open Air people/ethics (Jesus):** Data are collected from outdoor sensors on municipal poles, not from identifiable individuals, meaning there are no direct privacy risks. Avoid attributing neighborhood-level ambient air averages to individual personal exposure (ecological fallacy). Chicago community areas may contain substantial internal variation in pollution due to localized emission sources. Investigate air-pollution burdens without treating correlation with demographic factors as proof of causation. Public reporting of environmental disparities must be framed carefully to avoid stigmatizing communities with high pollution levels.
+- **Community Population people/ethics (Andrew):** Data are community-level aggregates, not individual observations. Avoid attributing population averages to a person (ecological fallacy). Investigate geographic differences in air-pollution burden without treating correlation as proof of causation. Chicago community areas may contain substantial internal variation. Comparing a **2023-labeled** demographic export with **2025–2026** pollution observations entails a time mismatch; ACS sampling/nonresponse and possible source-version differences add uncertainty. Privacy concerns are lower for area-level counts than person-level data, but public results still should not stigmatize communities.
 - **Cross-dataset ethics:** [TODO Anirudh: geographic/temporal mismatch, ecological fallacy, reporting of low-coverage areas, careful language about disparities and prevention of causal overclaiming].
 
 ---
@@ -215,16 +310,24 @@ Step 4: Match counts are printed after the join, total air rows, matched rows, u
 
 ---
 
-# Part I. Nutrition label, references and group sign-off
+# Part I. Nutrition label, references
 
-**Nutrition label:** [Open Air Chicago label PDF](nutrition_label/main.pdf). Source: [`nutrition_label/main.tex`](nutrition_label/main.tex) and [`nutrition_label/Card.tex`](nutrition_label/Card.tex).
+**Nutrition label:**
+
+[Open Air Chicago label PDF](nutrition_label/nutrition.pdf). Source: [`nutrition_label/main.tex`](nutrition_label/main.tex) and [`nutrition_label/Card.tex`](nutrition_label/Card.tex).
+
+[Population label PDF](population/Chicago_Community_Population_Overleaf_Project.pdf). Source: [`population/main.tex`](population/main.tex) and [`population/Card.tex`](population/Card.tex).
 
 ## Sources
 
 1. [City of Chicago Data Portal, Open Air Chicago Day Aggregations](https://data.cityofchicago.org/Health-Human-Services/Open-Air-Chicago-Day-Aggregations/rtmx-vkjr/about_data), `rtmx-vkjr` (analyzed API extract retrieved 2026-10-27).
 2. [Data.gov listing for Open Air Chicago Day Aggregations](https://catalog.data.gov/dataset/open-air-chicago-day-aggregations).
-3. [Chicago Health Atlas, income indicator](https://chicagohealthatlas.org/indicators/INC) [TODO Claudia/Auon: exact population dataset citation and access date].
-4. [Chicago Data Portal, ACS 5-Year Data by Community Area](https://data.cityofchicago.org/Community-Economic-Development/ACS-5-Year-Data-by-Community-Area-Most-Recent-Year/7umk-8dtw/about_data) [TODO: if used, retrieval date].
-5. [CMAP, Community Areas Local Emission 2019](https://datahub.cmap.illinois.gov/datasets/communityareas-localemission2019/about) [TODO: if used, retrieval date].
-6. [TODO Anirudh: direct City portal terms URL explaining redistribution, if not already linked in source].
-7. [TODO all: methodology/codebook references that substantiate precise variable descriptions].
+3. [Chicago Health Atlas home/about](https://chicagohealthatlas.org/), purpose, platform partners and ongoing updates (reviewed 2026-10-28).
+4. [Chicago Health Atlas, Population (POP)](https://chicagohealthatlas.org/indicators/POP), ACS/Decennial Census notes and B01001/B03002/P012 table references (reviewed 2026-10-28).
+5. [Chicago Health Atlas, Demographics (PCT)](https://chicagohealthatlas.org/indicators/PCT), subgroup-denominator and ACS notes (reviewed 2026-10-28).
+6. [Chicago Health Atlas, Median household income (INC)](https://chicagohealthatlas.org/indicators/INC), contextual indicator; **not** the exact source of every household-income bracket.
+7. Group file `data/Chicago_Community_Population_Data.csv` (77 rows x 30 columns; reference year 2023; original export date unverified); EDA evidence in `EDA-Files/eda.ipynb`.
+8. [Chicago Data Portal, ACS 5-Year Data by Community Area](https://data.cityofchicago.org/Community-Economic-Development/ACS-5-Year-Data-by-Community-Area-Most-Recent-Year/7umk-8dtw/about_data) [TODO: if used, retrieval date].
+9. [CMAP, Community Areas Local Emission 2019](https://datahub.cmap.illinois.gov/datasets/communityareas-localemission2019/about) [TODO: if used, retrieval date].
+10. [TODO relevant group member: direct City portal terms URL explaining Open Air redistribution, if not already linked in source].
+11. [TODO all: additional methodology/codebook references that substantiate exact income brackets and joint analysis].
