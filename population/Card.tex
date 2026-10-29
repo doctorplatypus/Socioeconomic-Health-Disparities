@@ -1,0 +1,50 @@
+% Self-contained label included by main.tex.
+% Update these facts when the group changes the source CSV or analysis.
+\begingroup
+\renewcommand{\arraystretch}{1.08}
+\setlength{\tabcolsep}{5pt}
+\newcommand{\nfrow}[2]{\textbf{#1}\hfill #2\\}
+\newcommand{\nfsection}[1]{\NFRULE\multicolumn{1}{l}{\scriptsize\bfseries #1}\\\NFrule}
+\begin{tabular}{@{\hspace{6pt}}p{\NFwidth}@{\hspace{6pt}}}
+\toprule
+\NFtitle\\
+\NFrule
+\multicolumn{1}{c}{\large\bfseries Chicago Community Population}\\
+\NFrule
+\nfrow{Dataset size}{77 records \textbar\ 30 fields}
+\nfrow{Record unit}{One Chicago community area}
+\nfsection{Motivation}
+\nfrow{Publisher}{Chicago Health Atlas}
+\nfrow{Platform partners}{CDPH, UIC PHAME Center, Metopio}
+\nfrow{Primary original source}{U.S. Census Bureau / ACS}
+\nfrow{Research aim}{Demographics and air-pollution comparisons}
+\nfsection{Composition}
+\nfrow{Geographic scope}{All 77 Chicago community areas}
+\nfrow{Reference label}{ACS Year 2023 (CSV field)}
+\nfrow{Time window}{2019–2023}
+\nfrow{Household income}{5 household-count brackets}
+\nfrow{Age and sex}{12 population-count columns}
+\nfrow{Race and ethnicity}{Counts; categories can overlap}
+\nfrow{Missing cells}{0 null or blank cells found}
+\nfsection{Collection}
+\nfrow{Original collection}{American Community Survey}
+\nfrow{Relevant source tables}{B01001 (age/sex), B03002 (race)}
+\nfrow{Export type}{Custom indicator-selection CSV}
+\nfsection{Cleaning and Labeling}
+\nfrow{Rows removed}{None documented for population EDA}
+\nfrow{Numeric parsing}{Removed commas; cast income counts}
+\nfrow{Derived features}{Household totals and income shares}
+\nfrow{Data-quality note}{Some subtotals differ by 1--2 people}
+\nfsection{Uses and Distribution}
+\nfrow{Intended uses}{Community-level comparisons}
+\nfrow{Format/access}{Public CSV via Chicago Health Atlas}
+\nfrow{Reuse}{Download, processing, redistribution reported}
+\nfsection{Maintenance and Evolution}
+\nfrow{Platform}{Atlas receives ongoing updates}
+\NFRULE
+\textbf{Responsible use:} Group patterns are not individual attributes;\\
+2023-labeled demographics vs. 2025--2026 pollution data;\\
+correlation does not demonstrate causation.\\
+\bottomrule
+\end{tabular}
+\endgroup
