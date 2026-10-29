@@ -66,7 +66,7 @@ The dataset supports descriptive comparisons of local pollution measurements and
 
 The dataset is publicly available from the [City of Chicago Data Portal](https://data.cityofchicago.org/Health-Human-Services/Open-Air-Chicago-Day-Aggregations/rtmx-vkjr/about_data) as a **CSV download** and through a **Socrata API** such as `https://data.cityofchicago.org/resource/rtmx-vkjr.csv`. The team member verified permission for downloading, analysis, processing and redistribution. **No specific dataset license was identified.** This is a statement about the observed documentation, not a declaration that the data have no legal terms.
 
-[TODO Anirudh: Preserve a direct link to the exact portal terms supporting reuse and include attribution requirements if stated. Record query parameters or a frozen snapshot rather than depending on a changing live endpoint.]
+License/terms of use: no named open-data license found. The City of Chicago's standard data disclaimer applies, no specific attribution required beyond noting the data is modified from cityofchicago.org and provided as-is with no accuracy guarantee. Full disclaimer: https://www.chicago.gov/city/en/narr/foia/data_disclaimer.html
 
 ## A7. Maintenance and evolution
 
@@ -151,7 +151,9 @@ The Chicago Health Atlas homepage describes the platform as an **evolving resour
 | **Temporal coverage** | Cleaned observations 2025-07-26 to 2026-10-26; not proof of uninterrupted coverage at each site. | CSV's `ACS Year` is **2023**; **exact original ACS release and underlying multi-year period are unverified**. |
 | **Bias / exclusions** | Nonrandom sensor siting, missing days/readings, daily smoothing, calibration variability, within-area heterogeneity and ecological inference. | ACS sample/nonresponse uncertainty, changes across years, neighborhood-level aggregation, within-area variation, source/period mismatch and minor subtotal inconsistencies (1–2 persons). |
 
-[TODO Anirudh: Explain differences in coverage, observation grain and year between datasets and report which matched community areas remain after a **verified** join.]
+Coverage, grain, and year differences: Open Air updates daily and spans July 2025 to October 2026. The secondary datasets don't, Median Income is a 2020-2024 average and Local Emission is frozen at 2019. So pollution readings get compared against income/emissions numbers from a different time window, worth keeping in mind when reading any trend.
+
+All three datasets join at the same level, one row per community area, 77 total. Income joined to Local Emission matched 75 of 77 areas (2 dropped from naming mismatches like apostrophes). Open Air joined to the secondary data by standardized community name, match counts are printed in Jesus_Data.ipynb.
 
 ---
 # Part D. Codebooks and variable definitions
@@ -182,7 +184,22 @@ The entries below refer to the **saved 30-column group CSV**. Comma-formatted nu
 
 ## D3. Secondary-dataset variables used in joins (Anirudh / group)
 
-[TODO: Document median income and local-emissions variables actually used, their dates, units and key definitions, or state if a proposed source was not used.]
+Median Income (Chicago_Median_Income_By_Community_Area.csv), 2020-2024:
+| Column | Meaning | Unit |
+|---|---|---|
+| Name | Community area name | text |
+| GEOID | Community area number (1-77) | id |
+| INC_2020-2024 | Median household income | USD |
+| PCI_2020-2024 | Per capita income | USD |
+
+Local Emission (CommunityAreas_LocalEmission2019.csv), 2019:
+| Column | Meaning | Unit |
+|---|---|---|
+| COMMUNITY | Community area name | text |
+| POP | Population | count |
+| RES_ELE_CO, NONRES_ELE, RES_NG_CO2, NONRES_NG_, ONROAD_CO2, WASTE_CO2E | CO2-equivalent emissions by source (summed to total_co2) | tons/year |
+
+Both used in Ani_Data.ipynb (income + emissions joined). Only income is used in Jesus_Data.ipynb.
 
 ---
 
@@ -264,7 +281,7 @@ Step 4: The draft states that match counts are printed after the join (air rows,
 | **Interoperable** | Tabular machine-readable data, identifiers, timestamp and coordinates. Source-to-API column naming differences and measurement units need codebook mapping. | CSV with textual community-area names, a 2023 year label, unique record IDs and comma-formatted count fields; numeric parsing and validated name matching are required. |
 | **Reusable** | Source attribution and cleaning provenance; analysis, processing and redistribution reportedly permitted under portal terms; **no named license identified**; save supporting terms link. | Original Census/ACS attribution and Atlas citation; user confirmed access/processing/redistribution, but **no dataset-wide named license verified**. Archive selected indicators, the saved export and notebook transformations. |
 
-[TODO Anirudh: Add FAIR notes for secondary sources if central to reproducibility, and review any conflicting license claims.]
+Both secondary datasets are easy to find and download, no login needed, and join cleanly on community area. Reuse is weaker though, Local Emission has no listed license and is frozen at 2019, so that limit should be stated whenever it's used.
 
 ---
 
@@ -274,7 +291,7 @@ Step 4: The draft states that match counts are printed after the join (air rows,
 
 - **Open Air people/ethics expansion:** [TODO Jesus: affected communities, privacy, representation, accountability, potential harm, uncertainty, use limitations and source-backed explanation.]
 - **Community Population people/ethics (Andrew):** Data are community-level aggregates, not individual observations. Avoid attributing population averages to a person (ecological fallacy). Investigate geographic differences in air-pollution burden without treating correlation as proof of causation. Chicago community areas may contain substantial internal variation. Comparing a **2023-labeled** demographic export with **2025–2026** pollution observations entails a time mismatch; ACS sampling/nonresponse and possible source-version differences add uncertainty. Privacy concerns are lower for area-level counts than person-level data, but public results still should not stigmatize communities.
-- **Cross-dataset ethics:** [TODO Anirudh: geographic/temporal mismatch, ecological fallacy, reporting of low-coverage areas, careful language about disparities and prevention of causal overclaiming].
+- **Cross-dataset ethics:** Mixing daily sensor data with old static snapshots can make things look more "current" than they are. All results are at the community-area level, not individual, so this describes neighborhoods, not people. Areas with fewer sensors get noisier numbers, don't read those as "worse," just less reliable. And none of this is causal, income and pollution correlating doesn't mean one causes the other.
 
 ---
 
@@ -282,11 +299,11 @@ Step 4: The draft states that match counts are printed after the join (air rows,
 
 ## Median household income
 
-[TODO Anirudh / relevant analyst: Portal URL, observation year, aggregation unit, units, source/maintainer, license/terms, why it is used, transformations and join to community areas.]
+Median income: Chicago Data Portal, 2020-2024 ACS estimate, one row per community area, maintained by the Census Bureau. Used to compare income against pollution. Joined by community name.
 
 ## Community-area local emissions (2019)
 
-[TODO Anirudh / relevant analyst: CMAP URL, 2019 reference year, emissions units, coverage, why it is used, and risks of comparing 2019 data with 2025-2026 sensor observations.]
+Local emissions: CMAP, 2019 only, maintained by CMAP. Used as a secondary pollution estimate (on-road CO2) to compare against income. Joined by community name, 2 of 77 areas didn't match.
 
 ---
 
@@ -312,6 +329,6 @@ Step 4: The draft states that match counts are printed after the join (air rows,
 7. Group file `data/Chicago_Community_Population_Data.csv` (77 rows x 30 columns; reference year 2023; original export date unverified); EDA evidence in `EDA-Files/eda.ipynb`.
 8. [Chicago Data Portal, ACS 5-Year Data by Community Area](https://data.cityofchicago.org/Community-Economic-Development/ACS-5-Year-Data-by-Community-Area-Most-Recent-Year/7umk-8dtw/about_data) [TODO: if used, retrieval date].
 9. [CMAP, Community Areas Local Emission 2019](https://datahub.cmap.illinois.gov/datasets/communityareas-localemission2019/about) [TODO: if used, retrieval date].
-10. [TODO relevant group member: direct City portal terms URL explaining Open Air redistribution, if not already linked in source].
+10. [City of Chicago Data Disclaimer](https://www.chicago.gov/city/en/narr/foia/data_disclaimer.html)
 11. [TODO all: additional methodology/codebook references that substantiate exact income brackets and joint analysis].
 
