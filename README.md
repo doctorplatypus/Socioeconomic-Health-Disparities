@@ -79,7 +79,7 @@ The Pearson correlation coefficient, listed as r in the table below, when plotti
 | Longitude | Average PM2.5 | -0.0494 | 0.4054  | `[-0.1644, 0.0670]` |
 
 
-![2D spatial scatter](Narrative%20Analysis/2d_spatial_scatter.jpg "2D Spatial Scatter")
+![2D spatial scatter](Narrative%20Analysis/Figures/Claudia_2d_spatial_scatter.jpg)
 
 ### AJ: Finding 2 Part 1
 
