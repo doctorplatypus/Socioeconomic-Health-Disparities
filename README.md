@@ -64,6 +64,9 @@ Revised RQ2: Does being near industrial sites and transportation corridors predi
 
 
 ## Main Findings (Narrative Analysis)
+
+
+### Claudia: Finding 1 
 * There is no evidence of linear correlation between average PM2.5 readings by Open Air Chicago sensors and latitude or longitude.
 
 
@@ -77,3 +80,26 @@ The Pearson correlation coefficient, listed as r in the table below, when plotti
 
 
 ![2D spatial scatter](Narrative Analysis/2d_spatial_scatter.jpg "2D Spatial Scatter")
+
+### AJ: Finding 2 Part 1
+
+Median household income alone did not meaningfully improve the predictions of average PM2.5 concentrations across Chicago's 77 community areas. We used linear regression and compared its performance against a baseline model that always predicted the average PM2. Using five-fold cross-validation, the income-based model had an average RMSE of 0.6178 µg/m³, compared with 0.6176 µg/m³ for the baseline. This shows almost no improvement in prediction accuracy. The Pearson correlation was also weak (r = −0.1195, p = 0.3007), with a 95% confidence interval of [−0.3345, 0.1074]. One possible alternative explanation was the unusually high pollution readings. Upon further investigation, there was a wildfire that caused the sensos to spike unusally for a couple days. To test whether these extreme readings influenced our results, we excluded those two dates and repeated the analysis. Although average community PM2.5 concentrations decreased by approximately 0.634 µg/m³, the income-based model still provided only a negligible improvement over the baseline (0.5834 versus 0.5853 µg/m³ RMSE). We also explored the number of jobs in a community and it is a really strong predictor for on-road CO2 emissions ($p < 0.001$, $R^2 = 0.704$ in a log-log model). These findings suggest that median household income alone is not a reliable linear predictor of average PM2.5 concentrations in our dataset.
+![My Graph](path/to/image.png)
+
+### Jesus: Finding 2 Part 2
+
+At first, we expected median household income to be a strong predictor for PM2.5 air pollution. However, the data showed a null result with basically no linear correlation ($r = -0.14$). We decided to combine our demographic and emissions datasets to figure out why this was happening. It turns out that Chicago's wealthiest neighborhoods, like the Loop and Near North Side, also happen to be the biggest commercial hubs. When we looked at the emissions data, we saw that the number of jobs in a community is a really strong predictor for on-road CO2 emissions ($p < 0.001$, $R^2 = 0.704$ in a log-log model). So basically, all the heavy commercial traffic from people commuting to these high-income job centers acts as a confounder. It creates so much pollution that it completely overrides the effect that wealth would normally have on local air quality.
+
+### Ani: Finding 3
+
+
+
+### Auon: Finding 4
+
+# Analysis
+
+Based on the below correlation coefficienct matrix, taken from the eda notebook, we can see that there's a pearson r coefficient of 0.800 between number of jobs and Onroad CO2 emissions. I decided to explore this connection further by trying to create a Linear Regression Model to see if we can justify Income having any explanatory power on Onroad CO2. 
+
+However upon performing the LINE test for the linear regression model, it was quite clear to see that multiple assumptions were not met. the Q-Q plot is not linear, Equal variance of errors is not met (distribution heavily skewed right). Using Boxcox (procedure not shown), I determined that a log regression model was most appropriate. After performing this transformation I now did a LINE test for the log regression model, and the results were much better. Normality was now met, and Linearity and Equal Variance were reasonably met. The real problem is independence, as there does seem to be a very slight upwards pattern in the residuals, *however* this could also be because of the order of the communities in the dataset. To further verify I found the Breusch-Pagan p-value which was 0.045, just slightly under 0.05, so we cannot entirely rule out the possibility of dependence. To address this limitation, we used HC3 heteroskedasticity-robust standard errors, where we got p < 0.001, with a 95% CI of (0.475, 0.640), B_1 = 0.5572. As our 95% CI does not include 0 and we have a P-value of less than 0.05, we determine that the relationship between jobs and on-road CO2 emissions remains statistically significant. However this does not mean jobs impacts these emissions.
+
+To verify whether or not Jobs significantly impact variability in Onroad CO2 emissions, we perform a two sided Wald Z test. From the results in my Narrative Analysis notebook, we can see that we reject our Null hypothesis, meaning there is sufficient evidence that the number of jobs in a community are a statistically significant predictor of on-road CO2 emissions.
