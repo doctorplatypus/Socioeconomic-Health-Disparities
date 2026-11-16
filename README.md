@@ -91,8 +91,10 @@ Median household income alone did not meaningfully improve the predictions of av
 At first, we expected median household income to be a strong predictor for PM2.5 air pollution. However, the data showed a null result with basically no linear correlation ($r = -0.14$). We decided to combine our demographic and emissions datasets to figure out why this was happening. It turns out that Chicago's wealthiest neighborhoods, like the Loop and Near North Side, also happen to be the biggest commercial hubs. When we looked at the emissions data, we saw that the number of jobs in a community is a really strong predictor for on-road CO2 emissions ($p < 0.001$, $R^2 = 0.704$ in a log-log model). So basically, all the heavy commercial traffic from people commuting to these high-income job centers acts as a confounder. It creates so much pollution that it completely overrides the effect that wealth would normally have on local air quality.
 
 ### Ani: Finding 3
+* Areas where residents drive less have more traffic CO2 per square mile (ρ = −0.31), but controlling for density drops it to about zero (partial ρ = −0.04, CI −0.27 to 0.18).
 
-
+I compared how much residents drive with traffic CO2 per square mile, dividing by area so larger community areas aren't penalized just for their size. Areas where residents drive less have more traffic CO2 per square mile (ρ = -0.31, CI -0.53 to -0.07), and the permutation test (p = 0.006) shows this is unlikely to be chance. The 20 areas with low resident driving but high traffic emissions have about $21,000 higher median income than the rest (CI $6,478 to $59,347, Mann-Whitney p = 0.0015). Controlling for density, the correlation drops to about zero (partial ρ = -0.04, CI -0.27 to 0.18), so density explains most of it. Without the five biggest job centers, the correlation weakens to ρ = -0.24 (CI -0.47 to 0.01) and its CI includes zero. The driving vs. emissions link is mostly a density effect, but the finding that mismatch areas are dense, central and higher income holds up, and none of this shows causation. ONROAD_CO2 is modeled, not measured (it could be checked against Open Air NO2), and with only 77 areas the confidence intervals are wide. All numbers come from my 
+![Resident driving vs. traffic emissions](Narrative%20Analysis/Figures/ani_driving_vs_traffic.png)
 
 ### Auon: Finding 4
 
