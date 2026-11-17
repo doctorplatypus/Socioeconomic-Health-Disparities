@@ -98,6 +98,14 @@ I compared how much residents drive with traffic CO2 per square mile, dividing b
 
 Based on the below correlation coefficienct matrix, taken from the eda notebook, we can see that there's a pearson r coefficient of 0.800 between number of jobs and Onroad CO2 emissions. I decided to explore this connection further by trying to create a Linear Regression Model to see if we can justify Income having any explanatory power on Onroad CO2. 
 
+| Variable | POP | JOBS | INCOME | ONROAD_CO2 | NONRES_ELE |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **POP** | 1.0 | 0.259841 | 0.310621 | 0.456785 | 0.404039 |
+| **JOBS** | 0.259841 | 1.0 | 0.370146 | 0.800138 | 0.91646 |
+| **INCOME** | 0.310621 | 0.370146 | 1.0 | 0.357041 | 0.385903 |
+| **ONROAD_CO2** | 0.456785 | 0.800138 | 0.357041 | 1.0 | 0.83165 |
+| **NONRES_ELE** | 0.404039 | 0.91646 | 0.385903 | 0.83165 | 1.0 |
+
 However upon performing the LINE test for the linear regression model, it was quite clear to see that multiple assumptions were not met. the Q-Q plot is not linear, Equal variance of errors is not met (distribution heavily skewed right). Using Boxcox (procedure not shown), I determined that a log regression model was most appropriate. After performing this transformation I now did a LINE test for the log regression model, and the results were much better. Normality was now met, and Linearity and Equal Variance were reasonably met. The real problem is independence, as there does seem to be a very slight upwards pattern in the residuals, *however* this could also be because of the order of the communities in the dataset. To further verify I found the Breusch-Pagan p-value which was 0.045, just slightly under 0.05, so we cannot entirely rule out the possibility of dependence. To address this limitation, we used HC3 heteroskedasticity-robust standard errors, where we got p < 0.001, with a 95% CI of (0.475, 0.640), B_1 = 0.5572. As our 95% CI does not include 0 and we have a P-value of less than 0.05, we determine that the relationship between jobs and on-road CO2 emissions remains statistically significant. However this does not mean jobs impacts these emissions.
 
 To verify whether or not Jobs significantly impact variability in Onroad CO2 emissions, we perform a two sided Wald Z test. From the results in my Narrative Analysis notebook, we can see that we reject our Null hypothesis, meaning there is sufficient evidence that the number of jobs in a community are a statistically significant predictor of on-road CO2 emissions.
