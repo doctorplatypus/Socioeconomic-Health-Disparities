@@ -64,9 +64,9 @@ Revised RQ2: Does being near industrial sites and transportation corridors predi
 
 
 ## Main Findings (Narrative Analysis)
-* There is no evidence of linear correlation between average PM2.5 readings by Open Air Chicago sensors and latitude or longitude. Finding 1
-* Median household income alone did not meaningfully improve predictions of average PM2. Finding 2
-* Areas where residents drive less have more traffic CO2 per square mile (ρ = −0.31), but controlling for density drops it to about zero (partial ρ = −0.04, CI −0.27 to 0.18). Finding 3
+* Finding 1: There is no evidence of linear correlation between average PM2.5 readings by Open Air Chicago sensors and latitude or longitude. 
+* Finding 2: Median household income alone did not meaningfully improve predictions of average PM2. 
+* Finding 3: Areas where residents drive less have more traffic CO2 per square mile (ρ = −0.31), but controlling for density drops it to about zero (partial ρ = −0.04, CI −0.27 to 0.18). 
 
 
 ### Claudia: Finding 1 
