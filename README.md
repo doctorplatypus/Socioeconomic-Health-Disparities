@@ -64,9 +64,9 @@ Revised RQ2: Does being near industrial sites and transportation corridors predi
 
 
 ## Main Findings (Narrative Analysis)
-* There is no evidence of linear correlation between average PM2.5 readings by Open Air Chicago sensors and latitude or longitude.
-* Median household income alone did not meaningfully improve predictions of average PM2.
-* Areas where residents drive less have more traffic CO2 per square mile (ρ = −0.31), but controlling for density drops it to about zero (partial ρ = −0.04, CI −0.27 to 0.18).
+* There is no evidence of linear correlation between average PM2.5 readings by Open Air Chicago sensors and latitude or longitude. Finding 1
+* Median household income alone did not meaningfully improve predictions of average PM2. Finding 2
+* Areas where residents drive less have more traffic CO2 per square mile (ρ = −0.31), but controlling for density drops it to about zero (partial ρ = −0.04, CI −0.27 to 0.18). Finding 3
 
 
 ### Claudia: Finding 1 
@@ -81,7 +81,7 @@ The Pearson correlation coefficient, listed as r in the table below, when plotti
 
 ![2D spatial scatter](Narrative%20Analysis/Figures/Claudia_2d_spatial_scatter.jpg)
 
-### AJ: Finding 2
+### AJ & Jesus: Finding 2
 
 Median household income alone did not meaningfully improve the predictions of average PM2.5 concentrations across Chicago's 77 community areas. We used linear regression and compared its performance against a baseline model that always predicted the average PM2. Using five-fold cross-validation, the income-based model had an average RMSE of 0.6178 µg/m³, compared with 0.6176 µg/m³ for the baseline. This shows almost no improvement in prediction accuracy. The Pearson correlation was also weak (r = −0.1195, p = 0.3007), with a 95% confidence interval of [−0.3345, 0.1074]. One possible alternative explanation was the unusually high pollution readings. Upon further investigation, there was a wildfire that caused the sensos to spike unusally for a couple days. To test whether these extreme readings influenced our results, we excluded those two dates and repeated the analysis. Although average community PM2.5 concentrations decreased by approximately 0.634 µg/m³, the income-based model still provided only a negligible improvement over the baseline (0.5834 versus 0.5853 µg/m³ RMSE). We also explored the number of jobs in a community and it is a really strong predictor for on-road CO2 emissions ($p < 0.001$, $R^2 = 0.704$ in a log-log model). These findings suggest that median household income alone is not a reliable linear predictor of average PM2.5 concentrations in our dataset.
 ![My Graph](Narrative%20Analysis/Figures/AJ-IncomeRegression.png)
