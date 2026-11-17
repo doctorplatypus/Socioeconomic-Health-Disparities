@@ -64,12 +64,12 @@ Revised RQ2: Does being near industrial sites and transportation corridors predi
 
 
 ## Main Findings (Narrative Analysis)
+* There is no evidence of linear correlation between average PM2.5 readings by Open Air Chicago sensors and latitude or longitude.
+* Median household income alone did not meaningfully improve predictions of average PM2.
+* Areas where residents drive less have more traffic CO2 per square mile (ρ = −0.31), but controlling for density drops it to about zero (partial ρ = −0.04, CI −0.27 to 0.18).
 
 
 ### Claudia: Finding 1 
-* There is no evidence of linear correlation between average PM2.5 readings by Open Air Chicago sensors and latitude or longitude.
-
-
 The Pearson correlation coefficient, listed as r in the table below, when plotting latitude against the average PM2.5 reading per sensor was 0.0115 with a p-value of 0.8461 and a 95% confidence interval of `[-0.1046, 0.1273]`. The Pearson correlation coefficient when plotting longitude against average PM2.5 reading was -0.0494 with a p-value of 0.4054 and a 95% confidence interval of `[-0.1644, 0.0670]`. Both r values are very close to 0, and both confidence intervals include 0, showing no statistically significant linear correlation between average PM2.5 and either latitude or longitude. This supports our EDA findings, which showed that the highest and lowest PM2.5 readings came from a mix of sensors on the north, west, and south sides of Chicago. These findings are supported by the 2D spatial scatterplot below, with each dot as one sensor with latitude plotted against longitude. There is not one singular trend of average PM2.5 increasing or decreasing as you travel north/south or east/west across the city, with most of the sensors across the city showing average PM2.5 readings near the middle of the range. The scatterplots of latitude vs average PM2.5 and longitude vs PM2.5 are also included in my [narrative analysis notebook](Narrative Analysis/Claudia_analysis.ipynb). I wanted to test if there was any correlation between increased PM2.5 air pollution and sensors further west or further south. These results may be confounded by Chicago’s sprawling layout and non-rectangular shape, along with the fact that major highways and transportation corridors, such as I-90/I-94 and the Chicago River, go diagonally across the city. One proposed check would be to calculate the distance between sensors with high or low PM2.5 or NO2 readings and major industrial hubs or transportation corridors. 
 
 
@@ -81,17 +81,12 @@ The Pearson correlation coefficient, listed as r in the table below, when plotti
 
 ![2D spatial scatter](Narrative%20Analysis/Figures/Claudia_2d_spatial_scatter.jpg)
 
-### AJ: Finding 2 Part 1
+### AJ: Finding 2
 
 Median household income alone did not meaningfully improve the predictions of average PM2.5 concentrations across Chicago's 77 community areas. We used linear regression and compared its performance against a baseline model that always predicted the average PM2. Using five-fold cross-validation, the income-based model had an average RMSE of 0.6178 µg/m³, compared with 0.6176 µg/m³ for the baseline. This shows almost no improvement in prediction accuracy. The Pearson correlation was also weak (r = −0.1195, p = 0.3007), with a 95% confidence interval of [−0.3345, 0.1074]. One possible alternative explanation was the unusually high pollution readings. Upon further investigation, there was a wildfire that caused the sensos to spike unusally for a couple days. To test whether these extreme readings influenced our results, we excluded those two dates and repeated the analysis. Although average community PM2.5 concentrations decreased by approximately 0.634 µg/m³, the income-based model still provided only a negligible improvement over the baseline (0.5834 versus 0.5853 µg/m³ RMSE). We also explored the number of jobs in a community and it is a really strong predictor for on-road CO2 emissions ($p < 0.001$, $R^2 = 0.704$ in a log-log model). These findings suggest that median household income alone is not a reliable linear predictor of average PM2.5 concentrations in our dataset.
 ![My Graph](Narrative%20Analysis/Figures/AJ-IncomeRegression.png)
 
-### Jesus: Finding 2 Part 2
-
-At first, we expected median household income to be a strong predictor for PM2.5 air pollution. However, the data showed a null result with basically no linear correlation ($r = -0.14$). We decided to combine our demographic and emissions datasets to figure out why this was happening. It turns out that Chicago's wealthiest neighborhoods, like the Loop and Near North Side, also happen to be the biggest commercial hubs. When we looked at the emissions data, we saw that the number of jobs in a community is a really strong predictor for on-road CO2 emissions ($p < 0.001$, $R^2 = 0.704$ in a log-log model). So basically, all the heavy commercial traffic from people commuting to these high-income job centers acts as a confounder. It creates so much pollution that it completely overrides the effect that wealth would normally have on local air quality.
-
 ### Ani: Finding 3
-* Areas where residents drive less have more traffic CO2 per square mile (ρ = −0.31), but controlling for density drops it to about zero (partial ρ = −0.04, CI −0.27 to 0.18).
 
 I compared how much residents drive with traffic CO2 per square mile, dividing by area so larger community areas aren't penalized just for their size. Areas where residents drive less have more traffic CO2 per square mile (ρ = -0.31, CI -0.53 to -0.07), and the permutation test (p = 0.006) shows this is unlikely to be chance. The 20 areas with low resident driving but high traffic emissions have about $21,000 higher median income than the rest (CI $6,478 to $59,347, Mann-Whitney p = 0.0015). Controlling for density, the correlation drops to about zero (partial ρ = -0.04, CI -0.27 to 0.18), so density explains most of it. Without the five biggest job centers, the correlation weakens to ρ = -0.24 (CI -0.47 to 0.01) and its CI includes zero. The driving vs. emissions link is mostly a density effect, but the finding that mismatch areas are dense, central and higher income holds up, and none of this shows causation. ONROAD_CO2 is modeled, not measured (it could be checked against Open Air NO2), and with only 77 areas the confidence intervals are wide. All numbers come from my 
 ![Resident driving vs. traffic emissions](Narrative%20Analysis/Figures/ani_driving_vs_traffic.png)
